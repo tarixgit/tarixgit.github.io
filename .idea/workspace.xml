@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b7f735e3-3721-4129-8662-acc8076ce944" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/tarixgit.github.io.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.editorconfig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.eslintrc.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.gitattributes" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/ISSUE_TEMPLATE.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/ISSUE_TEMPLATE/bug_report.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/ISSUE_TEMPLATE/feature_request.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/MAINTAINERS.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/PULL_REQUEST_TEMPLATE.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/issue-close-app.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.github/lock.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.nvmrc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.prettierignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.prettierrc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.stylelintrc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/.travis.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/CODE_OF_CONDUCT.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/CONTRIBUTING.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/Changelog.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/LICENSE.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/.htaccess" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/.nginx.conf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/app.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/A/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/A/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/A.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/StyledButton.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/buttonStyles.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/tests/A.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/tests/StyledButton.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Button/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Footer/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Footer/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Footer/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Footer/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Footer/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H1/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H1/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H2/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H2/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H3/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/H3/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/A.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/HeaderLink.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/Img.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/NavBar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/banner.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/tests/A.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/tests/Img.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/tests/__snapshots__/A.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/tests/__snapshots__/Img.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Header/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Img/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Img/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/IssueIcon/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/IssueIcon/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/Ul.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/tests/Ul.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/List/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/Item.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/tests/Item.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ListItem/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/Circle.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/tests/Circle.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/tests/__snapshots__/index.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/LoadingIndicator/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ReposList/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ReposList/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Toggle/Select.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Toggle/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Toggle/tests/Select.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/Toggle/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ToggleOption/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/components/ToggleOption/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/configureStore.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/reducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/selectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/tests/actions.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/tests/reducer.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/App/tests/selectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/List.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/ListItem.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/ListItemTitle.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/Loadable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/tests/List.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/tests/ListItem.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/tests/ListItemTitle.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/FeaturePage/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/AtPrefix.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/CenteredSection.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/Form.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/Input.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/Loadable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/Section.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/reducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/saga.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/selectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/AtPrefix.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/CenteredSection.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/Form.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/Input.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/Section.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/__snapshots__/saga.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/actions.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/reducer.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/saga.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/HomePage/tests/selectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/reducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/selectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/tests/actions.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/tests/reducer.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LanguageProvider/tests/selectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LocaleToggle/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LocaleToggle/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LocaleToggle/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LocaleToggle/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/LocaleToggle/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/NotFoundPage/Loadable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/NotFoundPage/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/NotFoundPage/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/NotFoundPage/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/IssueIcon.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/IssueLink.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/RepoLink.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/Wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/IssueIcon.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/IssueLink.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/RepoLink.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/Wrapper.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/__snapshots__/IssueIcon.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/__snapshots__/IssueLink.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/__snapshots__/RepoLink.test.js.snap" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/containers/RepoListItem/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/global-styles.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/i18n.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/images/favicon.ico" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/images/icon-512x512.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/index.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/reducers.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/tests/i18n.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/tests/store.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/translations/de.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/translations/en.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/checkStore.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/history.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/injectReducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/injectSaga.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/reducerInjectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/request.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/sagaInjectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/checkStore.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/injectReducer.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/injectSaga.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/reducerInjectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/request.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/app/utils/tests/sagaInjectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/appveyor.yml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/babel.config.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/css/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/css/linting.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/css/remove.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/css/sanitize.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/forks/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/commands.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/components.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/debugging.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/deployment.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/editor.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/faq.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/files.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/gotchas.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/introduction.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/remove.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/server-configs.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/webstorm-debug.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/webstorm-eslint.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/general/workflow.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/async-components.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/i18n.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/immutablejs.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/redux-saga.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/redux.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/remove.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/reselect.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/js/routing.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/maintenance/dependency.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/testing/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/testing/component-testing.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/testing/remote-testing.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/docs/testing/unit-testing.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/class.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/loadable.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/messages.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/stateless.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/component/test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/actions.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/actions.test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/class.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/constants.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/index.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/messages.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/reducer.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/reducer.test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/saga.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/saga.test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/selectors.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/selectors.test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/stateless.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/container/test.js.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/add-locale-data.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/app-locale.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/format-translation-messages.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/intl-locale-data.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/polyfill-intl-locale.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/translation-messages.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/language/translations-json.hbs" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/generators/utils/componentExists.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/mocks/cssModule.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/mocks/image.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/analyze.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/clean.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/extract-intl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/generate-templates-for-linting.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/helpers/checkmark.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/helpers/progress.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/helpers/xmark.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/scripts/npmcheckversion.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/app.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/configureStore.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/App/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/App/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/App/selectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/App/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/App/tests/selectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/HomePage/Loadable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/HomePage/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/HomePage/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/HomePage/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/LanguageProvider/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/LanguageProvider/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/LanguageProvider/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/LanguageProvider/reducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/LanguageProvider/selectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/NotFoundPage/Loadable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/NotFoundPage/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/NotFoundPage/messages.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/containers/NotFoundPage/tests/index.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/global-styles.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/i18n.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/index.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/reducers.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/tests/i18n.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/tests/store.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/translations/en.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/checkStore.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/constants.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/history.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/injectReducer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/injectSaga.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/reducerInjectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/sagaInjectors.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/tests/checkStore.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/tests/injectReducer.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/tests/injectSaga.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/tests/reducerInjectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/templates/utils/tests/sagaInjectors.test.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/testing/enzyme-setup.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/testing/test-bundler.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/webpack/webpack.base.babel.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/webpack/webpack.dev.babel.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/internals/webpack/webpack.prod.babel.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/jest.config.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/package-lock.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/package.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/argv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/logger.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/middlewares/addDevMiddlewares.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/middlewares/addProdMiddlewares.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/middlewares/frontendMiddleware.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/react/server/port.js" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/react/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="36" column="71" lean-forward="true" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="only-react" />
+      </map>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/react/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="tarixgit.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tarixgit.github.io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tarixgit.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tarixgit.github.io" type="462c0819:PsiDirectoryNode" />
+              <item name="react" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b7f735e3-3721-4129-8662-acc8076ce944" name="Default" comment="" />
+      <created>1548892041844</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1548892041844</updated>
+      <workItem from="1548892044951" duration="1770000" />
+      <workItem from="1548894556834" duration="60000" />
+      <workItem from="1548895082036" duration="137000" />
+    </task>
+    <task id="LOCAL-00001" summary="test with react">
+      <created>1548894024381</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1548894024381</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1967000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test with react" />
+    <option name="LAST_COMMIT_MESSAGE" value="test with react" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/react/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="71" lean-forward="true" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
