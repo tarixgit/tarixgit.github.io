@@ -41,7 +41,7 @@ class App extends Component {
                 y: i * mschubY
             })
         }
-
+        hiddenLayerData.push(ipnutData);
         for (let i = 1; i <= this.state.hiddenLayers; i++) {
             const currentLayer = [];
             for (let j = 1; j <= this.state.numberOfInputNeuron; j++) {
@@ -52,33 +52,13 @@ class App extends Component {
             }
             hiddenLayerData.push(currentLayer);
         }
+        hiddenLayerData.push(outputData);
         const div = d3.select(this.refVis).append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
         const svg = d3.select(this.viz).append('svg');
-        //input layer
-        svg.append("g")
-            .selectAll("circle")
-            .data(ipnutData)
-            .enter()
-            .append("circle")
-            .attr("r", this.state.radius)
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .on('mouseover', (d) => {
-                div.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                div.html('hi' + "<br/>" + d)
-                    .style("left", (d3.event.pageX + 10) + "px")
-                    .style("top", (d3.event.pageY - 18) + "px");
-            }).on('mouseout', (d) => {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
-        hiddenLayerData.forEach(currentLayer => {
+        hiddenLayerData.forEach((currentLayer, layerIndex) => {
             svg.append("g")
                 .selectAll("circle")
                 .data(currentLayer)
@@ -87,40 +67,54 @@ class App extends Component {
                 .attr("r", this.state.radius)
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y)
-                .on('mouseover', (d) => {
+                .on('mouseover', d => {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html('hi' + "<br/>" + d)
+                    div.html('Layer' + layerIndex + "<br/>" + d.x)
                         .style("left", (d3.event.pageX + 10) + "px")
                         .style("top", (d3.event.pageY - 18) + "px");
-                }).on('mouseout', (d) => {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
+                }).on('mouseout', d => {
+                    div.transition()
+                     .duration(500)
+                     .style("opacity", 0);
+                });
         });
-        // output layer
-        svg.append("g")
-            .selectAll("circle")
-            .data(outputData)
-            .enter()
-            .append("circle")
-            .attr("r", this.state.radius)
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .on('mouseover', (d) => {
-                div.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                div.html('hi' + "<br/>" + d)
-                    .style("left", (d3.event.pageX + 10) + "px")
-                    .style("top", (d3.event.pageY - 18) + "px");
-            }).on('mouseout', (d) => {
-                div.transition()
-                    .duration(500)
-                    .style("opacity", 0);
+        hiddenLayerData.forEach((currentLayer, layerIndex) => {
+            if (layerIndex == 0) {
+                return;
+            }
+            const accessorLayer = hiddenLayerData[layerIndex - 1];
+            const outspace = 1;
+            accessorLayer.forEach(accessor => {
+                svg.append("g")
+                    .selectAll("line")
+                    .data(currentLayer)
+                    .enter()
+                    .append("line")
+                    .attr("stroke", "#b9baba")
+                    .attr("stroke-width", "2.5")
+                    .attr("x1", (d, index) => accessor.x + this.state.radius + outspace)
+                    .attr("y1", (d, index) => accessor.y)
+                    .attr("x2", d => d.x - this.state.radius - outspace)
+                    .attr("y2", d => d.y)
+
             });
+                // .source((d, index) => [accessor[index].x,accessor[index].y] )
+                // .target(d => [d.x, d.y])
+            //     .on('mouseover', d => {
+            //         div.transition()
+            //             .duration(200)
+            //             .style("opacity", .9);
+            //         div.html('Layer' + layerIndex + "<br/>" + d.x)
+            //             .style("left", (d3.event.pageX + 10) + "px")
+            //             .style("top", (d3.event.pageY - 18) + "px");
+            //     }).on('mouseout', d => {
+            //     div.transition()
+            //         .duration(500)
+            //         .style("opacity", 0);
+            // });
+        });
     }
 
     render() {
