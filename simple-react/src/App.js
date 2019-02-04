@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Slider from '@material-ui/lab/Slider';
+import { withStyles } from '@material-ui/core/styles';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,16 +13,20 @@ class App extends Component {
         this.state = {
             counter: 0,
             width: 960,
-            height: 500,
+            height: 400,
             radius: 18,
             numberOfInputNeuron: 8,
             numberOfOutputNeuron: 8,
-            hiddenLayers: 1
+            hiddenLayers: 1,
+            selectedStep: 0
         };
-        this.updateChart = this.updateChart.bind(this);
+//        this.updateChart = this.updateChart.bind(this);
     }
-
-    updateChart() {
+    onSliderChange = (x) => {
+        this.setState({selectedStep: x})
+        return;
+    }
+    updateChart = () => {
         // Define the div for the tooltip
         const mschubY = 40;
         const schubX = 240;
@@ -100,24 +106,19 @@ class App extends Component {
                     .attr("y2", d => d.y)
 
             });
-                // .source((d, index) => [accessor[index].x,accessor[index].y] )
-                // .target(d => [d.x, d.y])
-            //     .on('mouseover', d => {
-            //         div.transition()
-            //             .duration(200)
-            //             .style("opacity", .9);
-            //         div.html('Layer' + layerIndex + "<br/>" + d.x)
-            //             .style("left", (d3.event.pageX + 10) + "px")
-            //             .style("top", (d3.event.pageY - 18) + "px");
-            //     }).on('mouseout', d => {
-            //     div.transition()
-            //         .duration(500)
-            //         .style("opacity", 0);
-            // });
         });
     }
 
     render() {
+        const styles = {
+            root: {
+                width: 300,
+            },
+            slider: {
+                padding: '22px 0px',
+            },
+        }
+        const {selectedStep} = this.state;
         return (
             <div className="App">
                 <header className="App-header">
@@ -132,9 +133,20 @@ class App extends Component {
                     </div>
                 </div>
                 <button onClick={this.updateChart}>update</button>
+                <div className={styles.root}>
+                    <Slider
+                        classes={{ container: styles.slider }}
+                        value={selectedStep}
+                        min={0}
+                        max={6}
+                        step={1}
+                        onChange={this.onSliderChange}
+                    />
+                </div>
             </div>
         );
     }
 }
 
 export default App;
+//export default withStyles(styles)(StepSlider);
