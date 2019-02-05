@@ -1,10 +1,27 @@
 import React, {Component} from 'react';
 import Slider from '@material-ui/lab/Slider';
+import LensIcon from '@material-ui/icons/LensOutlined';
 import { withStyles } from '@material-ui/core/styles';
 import logo from './logo.svg';
 import './App.css';
-
 const d3 = require('d3');
+
+const styles = {
+    root: {
+        width: 300,
+    },
+    slider: {
+        padding: '22px 0px',
+    },
+    thumbIcon: {
+        borderRadius: '50%',
+    },
+    thumbIconWrapper: {
+        backgroundColor: '#fff',
+        width: 'auto',
+        height: 'auto  '
+    },
+};
 
 class App extends Component {
     constructor(props) {
@@ -22,8 +39,8 @@ class App extends Component {
         };
 //        this.updateChart = this.updateChart.bind(this);
     }
-    onSliderChange = (x) => {
-        this.setState({selectedStep: x})
+    onSliderChange = (event, selectedStep) => {
+        this.setState({selectedStep});
         return;
     }
     updateChart = () => {
@@ -119,6 +136,7 @@ class App extends Component {
             },
         }
         const {selectedStep} = this.state;
+        const { classes } = this.props;
         return (
             <div className="App">
                 <header className="App-header">
@@ -126,27 +144,32 @@ class App extends Component {
                         Visualisation of neural network
                     </p>
                 </header>
-                <div className='d3body'>
-                    <div ref={refVis => (this.refVis = refVis)}>
-                        <svg ref={viz => (this.viz = viz)}
-                             width={this.state.width} height={this.state.height}/>
+                <div className='Main-container'>
+                    <div className='d3body'>
+                        <div ref={refVis => (this.refVis = refVis)}>
+                            <svg ref={viz => (this.viz = viz)}
+                                 width={this.state.width} height={this.state.height}/>
+                        </div>
                     </div>
-                </div>
-                <button onClick={this.updateChart}>update</button>
-                <div className={styles.root}>
-                    <Slider
-                        classes={{ container: styles.slider }}
-                        value={selectedStep}
-                        min={0}
-                        max={6}
-                        step={1}
-                        onChange={this.onSliderChange}
-                    />
+                    <button onClick={this.updateChart}>update</button>
+                    <div className={styles.root}>
+                        <Slider
+                            classes={{
+                                container: classes.slider,
+                                thumbIconWrapper: classes.thumbIconWrapper,
+                            }}
+                            thumb={<LensIcon style={{ color: '#2196f3' }}/>}
+                            value={selectedStep}
+                            min={0}
+                            max={10}
+                            step={1}
+                            onChange={this.onSliderChange}
+                        />
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default App;
-//export default withStyles(styles)(StepSlider);
+export default withStyles(styles)(App);
