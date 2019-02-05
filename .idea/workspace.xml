@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7f735e3-3721-4129-8662-acc8076ce944" name="Default" comment="">
+    <list default="true" id="b7f735e3-3721-4129-8662-acc8076ce944" name="Default" comment="- fix and adjust the slider">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/asset-manifest.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/manifest.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/precache-manifest.1697504486192229515a07333bbe5727.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/service-worker.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/css/main.2080058a.chunk.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/css/main.2080058a.chunk.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/1.69149bb2.chunk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/1.69149bb2.chunk.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/main.9ad094db.chunk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/main.9ad094db.chunk.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/runtime~main.229c360f.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/js/runtime~main.229c360f.js.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/static/media/logo.5d5d9eef.svg" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/simple-react/package.json" afterPath="$PROJECT_DIR$/simple-react/package.json" />
-      <change beforePath="$PROJECT_DIR$/simple-react/src/App.css" afterPath="$PROJECT_DIR$/simple-react/src/App.css" />
-      <change beforePath="$PROJECT_DIR$/simple-react/src/App.js" afterPath="$PROJECT_DIR$/simple-react/src/App.js" />
-      <change beforePath="$PROJECT_DIR$/simple-react/yarn.lock" afterPath="$PROJECT_DIR$/simple-react/yarn.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/simple-react/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
-              <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+              <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -52,11 +63,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simple-react/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="633">
               <caret line="50" column="6" lean-forward="false" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="precache-manifest.1697504486192229515a07333bbe5727.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/simple-react/build/precache-manifest.1697504486192229515a07333bbe5727.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -128,13 +149,7 @@
             <path>
               <item name="tarixgit.github.io" type="b2602c69:ProjectViewProjectNode" />
               <item name="tarixgit.github.io" type="462c0819:PsiDirectoryNode" />
-              <item name="simple-react" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tarixgit.github.io" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tarixgit.github.io" type="462c0819:PsiDirectoryNode" />
-              <item name="simple-react" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -226,11 +241,25 @@
       <option name="project" value="LOCAL" />
       <updated>1548901475846</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- fix and adjust the slider">
+      <created>1549356797769</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1549356797769</updated>
+    </task>
+    <task id="LOCAL-00005" summary="- fix and adjust the slider">
+      <created>1549356951229</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549356951229</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20171000" />
+    <option name="totallyTimeSpent" value="20460000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1921" y="23" width="1920" height="979" extended-state="0" />
@@ -243,7 +272,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.49815693" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30089375" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29977375" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20357497" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -301,7 +330,8 @@
     <MESSAGE value="test with react" />
     <MESSAGE value="add simple react" />
     <MESSAGE value="test with simple react" />
-    <option name="LAST_COMMIT_MESSAGE" value="test with simple react" />
+    <MESSAGE value="- fix and adjust the slider" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix and adjust the slider" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -310,13 +340,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/react/app/containers/HomePage/reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react/app/containers/HomePage/Loadable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -666,7 +689,7 @@
     <entry file="file://$PROJECT_DIR$/simple-react/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
-          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+          <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -677,6 +700,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="633">
           <caret line="50" column="6" lean-forward="false" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simple-react/build/precache-manifest.1697504486192229515a07333bbe5727.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
           <folding />
         </state>
       </provider>
