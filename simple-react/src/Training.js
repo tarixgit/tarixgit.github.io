@@ -3,7 +3,11 @@ import Slider from '@material-ui/lab/Slider';
 import LensIcon from '@material-ui/icons/LensOutlined';
 import { withStyles } from '@material-ui/core/styles';
 import logo from './logo.svg';
-import './App.css';
+import './Trainig.css';
+import StepperNN from "./StepperNN";
+
+const { Provider, Node } = require("@nteract/mathjax");
+
 const d3 = require('d3');
 
 const styles = {
@@ -23,7 +27,7 @@ const styles = {
     },
 };
 
-class App extends Component {
+class Training extends Component {
     constructor(props) {
         super(props);
         // Don't call this.setState() here!
@@ -134,9 +138,10 @@ class App extends Component {
             slider: {
                 padding: '22px 0px',
             },
-        }
+       };
         const {selectedStep} = this.state;
         const { classes } = this.props;
+        const tex = String.raw`\overrightarrow{O^1} = S(\overrightarrow{O}, W_1)`
         return (
             <div className="App">
                 <header className="App-header">
@@ -145,26 +150,16 @@ class App extends Component {
                     </p>
                 </header>
                 <div className='Main-container'>
+
                     <div className='d3body'>
                         <div ref={refVis => (this.refVis = refVis)}>
                             <svg ref={viz => (this.viz = viz)}
                                  width={this.state.width} height={this.state.height}/>
                         </div>
                     </div>
-                    <button onClick={this.updateChart}>update</button>
-                    <div className={styles.root}>
-                        <Slider
-                            classes={{
-                                container: classes.slider,
-                                thumbIconWrapper: classes.thumbIconWrapper,
-                            }}
-                            thumb={<LensIcon style={{ color: '#2196f3' }}/>}
-                            value={selectedStep}
-                            min={0}
-                            max={10}
-                            step={1}
-                            onChange={this.onSliderChange}
-                        />
+                    <StepperNN/>
+                    <div className={'footer'}>
+                        <button onClick={this.updateChart}>update</button>
                     </div>
                 </div>
             </div>
@@ -172,4 +167,4 @@ class App extends Component {
     }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(Training);
