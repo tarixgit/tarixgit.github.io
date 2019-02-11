@@ -6,6 +6,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import StepButton from "@material-ui/core/es/StepButton/StepButton";
 const { Provider, Node } = require("@nteract/mathjax");
 
 const styles = theme => ({
@@ -56,20 +57,14 @@ function getStepContent(step) {
 class StepperNN extends React.Component {
     state = {
         activeStep: 0,
-        skipped: new Set(),
+        completed: new Set(),
     };
 
 
     handleNext = () => {
         const { activeStep } = this.state;
-        let { skipped } = this.state;
-        if (this.isStepSkipped(activeStep)) {
-            skipped = new Set(skipped.values());
-            skipped.delete(activeStep);
-        }
         this.setState({
             activeStep: activeStep + 1,
-            skipped,
         });
     };
 
@@ -79,14 +74,21 @@ class StepperNN extends React.Component {
         }));
     };
 
+    handleStep = step => () => {
+        this.setState({
+            activeStep: step,
+        });
+    };
+
+
     handleReset = () => {
         this.setState({
             activeStep: 0,
         });
     };
 
-    isStepSkipped(step) {
-        return this.state.skipped.has(step);
+    isStepComplete(step) {
+        return step < this.state.activeStep;
     }
 
     render() {
@@ -96,11 +98,16 @@ class StepperNN extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Stepper activeStep={activeStep} alternativeLabel>
-                    {steps.map(label => {
+                <Stepper activeStep={activeStep} editable alternativeLabel>
+                    {steps.map((label, index) => {
                         return (
                             <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
+                                <StepButton
+                                    onClick={this.handleStep(index)}
+                                    completed={this.isStepComplete(index)}
+                                >
+                                    {label}
+                                </StepButton>
                             </Step>
                         );
                     })}
