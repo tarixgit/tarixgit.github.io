@@ -524,60 +524,7 @@ class Training extends Component {
         const data = this.prepareMatrixData(9, 1); //TODO
         this.drawRoundBracket(matrixSvg, 28, 50, 28 + width, 50);
         this.drawMatrixDescr(matrixSvg, 28, 15, width, this.refVisTempOne);
-        const matrixSvgOne = matrixSvg.append('svg')
-            .attr('x', 28)
-            .attr('y', 60)
-            .attr('class', 'firstMatrix');
-
-        const row = matrixSvgOne.selectAll('.row')
-            .data(data)
-            .enter().append('g')
-            .attr('class', 'row');
-
-        const cell = row.selectAll('.cell')
-            .data(d => d)
-            .enter().append('g')
-            .attr('class', 'cell');
-
-        cell.append('rect')
-            .attr('class', 'square')
-            .attr('x', d => d.x)
-            .attr('y', d => d.y)
-            .attr('width', d => d.width)
-            .attr('height', d => d.height)
-            .style('fill', '#fff')
-            // .style('opacity', '0.1')
-            //.style('stroke', '#222')
-            // .style("stroke-opacity", .9)
-            .on('click', function (d) {
-                d.click++;
-                if ((d.click) % 4 === 0) {
-                    d3.select(this).style('fill', '#fff');
-                }
-                if ((d.click) % 4 === 1) {
-                    d3.select(this).style('fill', '#2C93E8');
-                }
-                if ((d.click) % 4 === 2) {
-                    d3.select(this).style('fill', '#F56C4E');
-                }
-                if ((d.click) % 4 === 3) {
-                    d3.select(this).style('fill', '#838690');
-                }
-            });
-
-        cell.append('svg')
-            .attr('x', d => d.x)
-            .attr('y', d => d.y)
-            .attr('width', d => d.width)
-            .attr('height', d => d.height)
-            .append('text').text(d => d.value)
-            .attr('x', '50%')
-            .attr('y', '50%')
-            .attr('alignment-baseline', 'middle')
-            .attr('text-anchor', 'middle')
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "12px");
-
+        const matrixSvgOne = this.drawMatrix(matrixSvg, data, 28, 60);
         this.setState({matrixSvgOne});
     };
 
@@ -590,10 +537,15 @@ class Training extends Component {
         this.drawKreuz(matrixSvg, 28 + width + (128 - (28 + width))/2, 60 + 9*heightOfCell / 2);
         this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfInputNeuron), 50);
         this.drawMatrixDescr(matrixSvg, 128, 25, (width*9), this.refVisTempTwo);
-        const matrixSvgTwo = matrixSvg.append('svg')
-            .attr('x', 128)  //28
-            .attr('y', 60);   //10
-        const row = matrixSvgTwo.selectAll('.row')
+        const matrixSvgTwo = this.drawMatrix(matrixSvg, data, 128, 60);
+        this.setState({matrixSvgTwo});
+    };
+
+    drawMatrix = (matrixSvg, data, x, y) => {
+        const newMatrixSvg =  matrixSvg.append('svg')
+            .attr('x', x)  //28
+            .attr('y', y);   //10
+        const row = newMatrixSvg.selectAll('.row')
             .data(data)
             .enter().append('g')
             .attr('class', 'row');
@@ -641,8 +593,7 @@ class Training extends Component {
             .attr('text-anchor', 'middle')
             .attr("font-family", "sans-serif")
             .attr("font-size", "12px");
-
-        this.setState({matrixSvgTwo});
+        return newMatrixSvg;
     };
 
     openExplanationModal = () => {
@@ -664,21 +615,6 @@ class Training extends Component {
                     <div className={'small'}>The whole algorithm consist only of 10 simple steps.</div>
                 </header>
                 <div className='Main-container'>
-                    {/*<div className='matrix'>
-                        <Typography variant="h6" align="center"  gutterBottom style={{fontWeight: '400'}}>
-                            {this.state.currentDescription.head}
-                        </Typography>
-                        <Typography variant="body2" gutterBottom style={{fontWeight: '300'}}>
-                            {this.state.currentDescription.body}
-                        </Typography>
-                        <Typography className={classes.instructions} align={"center"}>
-                            <Provider>
-                                <p>
-                                    <Node inline>{this.state.currentStepFormula}</Node>
-                                </p>
-                            </Provider>
-                        </Typography>
-                    </div>*/}
                     <div className='d3body'>
                         <div ref={refVis => (this.refVis = refVis)}>
                             <div style={{display: 'none'}} ref={refVis => (this.refVisTempOne = refVis)}>
