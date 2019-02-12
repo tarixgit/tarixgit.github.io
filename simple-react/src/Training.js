@@ -44,10 +44,13 @@ class Training extends Component {
             numberOfOutputNeuron: 9,
             hiddenLayers: 1,
             selectedStep: 0,
-            descrOne: String.raw`\overrightarrow{O}`,
-            descrTwo: String.raw`W_1`,
+            descrFormulaOne: String.raw`\overrightarrow{O}`,
+            descrFormulaTwo: String.raw`W_1`,
             currentStepFormula: this.getStepContent(0),
-            currentStep: 0
+            currentDescription: this.getStepDescription(0),
+            currentStep: 0,
+            matrixSvgOne: null,
+            matrixSvgTwo: null
         };
     }
 
@@ -57,44 +60,270 @@ class Training extends Component {
         const matrixSvg = svg.append('svg')
             .attr('x', 20)
             .attr('y', 50);
+        this.drawFirstMatrix(matrixSvg);
         this.setState({svg, svgGraph, matrixSvg});
         this.updateChart(null, svgGraph);
         // MathJax.Hub.Queue(["Typeset",MathJax.Hub, root]);
     }
 
+    getStepDescription = (step) => {
+        switch (step) {
+            case 0:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {'The neural network consist of neurons and connection between neurons. Neurons are here nodes. ' +
+                            'Connection are edges. As input we become some features about object and output told us to which group belong this object(in case of classification).'}
+                        </p>
+                        <p>
+                            {'The most popular problems that tried to be solved with Neural Network(NN) is classification, ' +
+                            'for example classification of handwritten numbers. ' +
+                            'At the initial phase we take the input data and prepare this for the  algorithm and generate the weights randomly between 0 and 1.'}
+                        </p>
+                        <p>
+                            {'As features we take here every pixels of image and transform this to the range between 0 and 1.'}
+                        </p>
+                    </div>)
+
+                };
+            case 1:
+                return {
+                    head: 'Multiple input with weight',
+                    body: (<div>
+                        <p>
+                            {'The first step of algorithm is multiply the input(Vector O) with the weights(W) and take the sigmoid function of this.'}
+                        </p>
+                        <p>
+                            {'- vector and matrix multiplication'}
+                        </p>
+                        <p>
+                            {'- take a sigmoid fucntion of result'}
+                        </p>
+                    </div>)
+
+                };
+            case 2:
+                return {
+                    head: 'Multiple output  with weight',
+                    body: (<div>
+                        <p>
+                            {'The result of the step before we take as input for this step.'}
+                        </p>
+                        <p>
+                            {'- vector and matrix multiplication'}
+                        </p>
+                        <p>
+                            {'- take a sigmoid fucntion of result'}
+                        </p>
+                    </div>)
+
+                };
+            case 3:
+                return {
+                    head: 'Deviation of error',
+                    body: (<div>
+                        <p>
+                            {'By this step wir become already the output of NN. And by training phase is here most important place.'}
+                        </p>
+                        <p>
+                            {'We expect that NN give us possibility, which number we take to process. ' +
+                            'Cause the network didn\'t learn the numbers. It give us the wrong result. ' +
+                            'Now we calculate the errors, how far we are from correct result and use this to adjust over weights.'}
+                        </p>
+                        <p>
+                            {'-  subtraction of NN the result  and expected output(t)'}
+                        </p>
+                    </div>)
+
+                };
+            case 4:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 5:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 6:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 7:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 8:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 9:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            case 10:
+                return {
+                    head: 'Welcome to visualisation of Neural network algorithm',
+                    body: (<div>
+                        <p>
+                            {''}
+                        </p>
+                    </div>)
+
+                };
+            default:
+                return 'learning rate step';
+        }
+    };
+
     getStepContent = (step) => {
         switch (step) {
             case 0:
-                return String.raw`\overrightarrow{O^1} = S(\overrightarrow{O}, W_1)`;
+                return '';
             case 1:
-                return String.raw`\overrightarrow{O^2} = S(\overrightarrow{O^1}, W_2)`;
+                return String.raw`\overrightarrow{O^1} = S(\overrightarrow{O}, W_1)`;
             case 2:
-                return String.raw`\overrightarrow{e} = \begin{pmatrix} O^2_1 - t_1 \\ O^2_2 - t_2 \\ \vdots \\ O^2_m - t_m \\ \end{pmatrix}`;
+                return String.raw`\overrightarrow{O^2} = S(\overrightarrow{O^1}, W_2)`;
             case 3:
-                return String.raw`E = \frac{1}{2}\{(O^2_1 - t_1)^2 + (O^2_2 - t_2)^2 + ... +(O^2_m - t_m)^2\}`;
+                return String.raw`\overrightarrow{e} = \begin{pmatrix} O^2_1 - t_1 \\ O^2_2 - t_2 \\ \vdots \\ O^2_m - t_m \\ \end{pmatrix}`;
             case 4:
-                return String.raw`D_2 = \begin{pmatrix} O^2_1(1 - O^2_1) & \cdots & \cdots \\ \cdots & O^2_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^2_m(1 - O^2_m)\\ \end{pmatrix}`;
+                return String.raw`E = \frac{1}{2}\{(O^2_1 - t_1)^2 + (O^2_2 - t_2)^2 + ... +(O^2_m - t_m)^2\}`;
             case 5:
-                return String.raw`D_1 = \begin{pmatrix} O^1_1(1 - O^1_1) & \cdots & \cdots \\ \cdots & O^1_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^1_k(1 - O^1_k)\\ \end{pmatrix}`;
+                return String.raw`D_2 = \begin{pmatrix} O^2_1(1 - O^2_1) & \cdots & \cdots \\ \cdots & O^2_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^2_m(1 - O^2_m)\\ \end{pmatrix}`;
             case 6:
-                return String.raw`\overrightarrow{\delta^2} = D_2 * \overrightarrow{e}`;
+                return String.raw`D_1 = \begin{pmatrix} O^1_1(1 - O^1_1) & \cdots & \cdots \\ \cdots & O^1_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^1_k(1 - O^1_k)\\ \end{pmatrix}`;
             case 7:
-                return String.raw`\overrightarrow{\delta^1} = D_1 * W_2 * \overrightarrow{e}`;
+                return String.raw`\overrightarrow{\delta^2} = D_2 * \overrightarrow{e}`;
             case 8:
-                return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
+                return String.raw`\overrightarrow{\delta^1} = D_1 * W_2 * \overrightarrow{e}`;
             case 9:
+                return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
+            case 10:
                 return String.raw`\overrightarrow{\Delta w_1^T} = - \gamma * \overrightarrow{\delta^1}`;
             default:
                 return 'learning rate step';
         }
     };
 
+    getStepFormulaDescription = (step) => {
+        switch (step) {
+            case 0:
+                return {
+                    descrFormulaOne: String.raw`\overrightarrow{O}`,
+                    descrFormulaTwo: String.raw`W_1`
+                };
+            case 1:
+                return {
+                    descrFormulaOne: String.raw`\overrightarrow{O}`,
+                    descrFormulaTwo: String.raw`W_1`
+                };
+            case 2:
+                return {
+                    descrFormulaOne: String.raw`\overrightarrow{O^2}`,
+                    descrFormulaTwo: String.raw`W_2`
+                };
+            case 3:
+                return String.raw`\overrightarrow{e} = \begin{pmatrix} O^2_1 - t_1 \\ O^2_2 - t_2 \\ \vdots \\ O^2_m - t_m \\ \end{pmatrix}`;
+            case 4:
+                return String.raw`E = \frac{1}{2}\{(O^2_1 - t_1)^2 + (O^2_2 - t_2)^2 + ... +(O^2_m - t_m)^2\}`;
+            case 5:
+                return String.raw`D_2 = \begin{pmatrix} O^2_1(1 - O^2_1) & \cdots & \cdots \\ \cdots & O^2_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^2_m(1 - O^2_m)\\ \end{pmatrix}`;
+            case 6:
+                return String.raw`D_1 = \begin{pmatrix} O^1_1(1 - O^1_1) & \cdots & \cdots \\ \cdots & O^1_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^1_k(1 - O^1_k)\\ \end{pmatrix}`;
+            case 7:
+                return String.raw`\overrightarrow{\delta^2} = D_2 * \overrightarrow{e}`;
+            case 8:
+                return String.raw`\overrightarrow{\delta^1} = D_1 * W_2 * \overrightarrow{e}`;
+            case 9:
+                return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
+            case 10:
+                return String.raw`\overrightarrow{\Delta w_1^T} = - \gamma * \overrightarrow{\delta^1}`;
+            default:
+                return 'learning rate step';
+        }
+    }
+
+    updateMatrix = (step, matrixSvg) => {
+        switch (step) {
+            case 0: {
+                this.drawFirstMatrix(matrixSvg);
+                return;
+            }
+            case 1: {
+                this.drawFirstMatrix(matrixSvg);
+                this.drawSecondMatrix(matrixSvg);
+                return;
+            }
+            case 2: {
+                this.drawFirstMatrix(matrixSvg);
+                this.drawSecondMatrix(matrixSvg);
+                return;
+            }
+            case 3: {
+                this.drawFirstMatrix(matrixSvg);
+                this.drawSecondMatrix(matrixSvg);
+                return;
+            }
+            default:
+                return;
+        }
+    }
+
     setStepDescription = (currentStep) => {
         const currentStepFormula = this.getStepContent(currentStep);
+        const currentDescription = this.getStepDescription(currentStep);
+        const {descrFormulaOne, descrFormulaTwo} = this.getStepFormulaDescription(currentStep);
         this.setState({
             currentStepFormula,
-            currentStep
+            currentDescription,
+            currentStep,
+            descrFormulaOne: descrFormulaOne,
+            descrFormulaTwo: descrFormulaTwo
         });
+
+        const matrixSvg = this.state.matrixSvg;
+        if (!!matrixSvg) {
+            matrixSvg.selectAll("*").remove();
+        } else {
+            return;
+        }
+        this.updateMatrix(currentStep, matrixSvg);
     };
 
     onSliderChange = (event, selectedStep) => {
@@ -264,17 +493,15 @@ class Training extends Component {
         ;
     };
 
-    drawFirstMatrix = () => {
-        const {matrixSvg} = this.state;
+    drawFirstMatrix = (matrixSvg) => {
         const width = this.state.widthOfCell;
-        const heightOfCell = this.state.heightOfCell;
         const data = this.prepareMatrixData(9, 1); //TODO
         this.drawRoundBracket(matrixSvg, 28, 50, 28 + width, 50);
-        this.drawKreuz(matrixSvg, 28 + width + (128 - (28 + width))/2, 60 + 9*heightOfCell / 2);
         this.drawMatrixDescr(matrixSvg, 28, 15, width, this.refVisTempOne);
         const matrixSvgOne = matrixSvg.append('svg')
             .attr('x', 28)
-            .attr('y', 60);
+            .attr('y', 60)
+            .attr('class', 'firstMatrix');
 
         const row = matrixSvgOne.selectAll('.row')
             .data(data)
@@ -324,14 +551,17 @@ class Training extends Component {
             .attr('text-anchor', 'middle')
             .attr("font-family", "sans-serif")
             .attr("font-size", "12px");
+
+        this.setState({matrixSvgOne});
     };
 
-    drawSecondMatrix = () => {
-        const {matrixSvg} = this.state;
+    drawSecondMatrix = (matrixSvg) => {
         const width = this.state.widthOfCell;
+        const heightOfCell = this.state.heightOfCell;
         const numberOfInputNeuron = this.state.numberOfInputNeuron;
         const numberOfOutputNeuron = this.state.numberOfOutputNeuron;
         const data = this.prepareMatrixData(numberOfInputNeuron, numberOfOutputNeuron);
+        this.drawKreuz(matrixSvg, 28 + width + (128 - (28 + width))/2, 60 + 9*heightOfCell / 2);
         this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfInputNeuron), 50);
         this.drawMatrixDescr(matrixSvg, 128, 25, (width*9), this.refVisTempTwo);
         const matrixSvgTwo = matrixSvg.append('svg')
@@ -385,6 +615,8 @@ class Training extends Component {
             .attr('text-anchor', 'middle')
             .attr("font-family", "sans-serif")
             .attr("font-size", "12px");
+
+        this.setState({matrixSvgTwo});
     };
 
     render() {
@@ -392,32 +624,46 @@ class Training extends Component {
         return (
             <div className='App'>
                 <header className='App-header'>
-                    <div>
+                    {/*<div>
                         Visualisation of neural network
-                    </div>
+                    </div>*/}
+                    <Typography variant="h4" gutterBottom>
+                        Visualisation of neural network
+                    </Typography>
                     <div className={'small'}>The whole algorithm consist only of 10 simple steps.</div>
                 </header>
                 <div className='Main-container'>
                     <div className='matrix'>
-                        some info
-
+{/*                        <h2>
+                            {this.state.currentDescription.head}
+                        </h2>*/}
+                        <Typography variant="h6" align="center"  gutterBottom style={{fontWeight: '400'}}>
+                            {this.state.currentDescription.head}
+                        </Typography>
+{/*                        <div>
+                            {this.state.currentDescription.body}
+                        </div>*/}
+                        <Typography variant="body2" gutterBottom style={{fontWeight: '300'}}>
+                            {this.state.currentDescription.body}
+                        </Typography>
+                        <Typography className={classes.instructions} align={"center"}>
                             <Provider>
                                 <p>
                                     <Node inline>{this.state.currentStepFormula}</Node>
                                 </p>
                             </Provider>
-
+                        </Typography>
                     </div>
                     <div className='d3body'>
                         <div ref={refVis => (this.refVis = refVis)}>
                             <div style={{display: 'none'}} ref={refVis => (this.refVisTempOne = refVis)}>
                                 <Provider>
-                                    <Node inline>{this.state.descrOne}</Node>
+                                    <Node inline>{this.state.descrFormulaOne}</Node>
                                 </Provider>
                             </div>
                             <div style={{display: 'none'}} ref={refVis => (this.refVisTempTwo = refVis)}>
                                 <Provider>
-                                    <Node inline>{this.state.descrTwo}</Node>
+                                    <Node inline>{this.state.descrFormulaTwo}</Node>
                                 </Provider>
                             </div>
 
@@ -429,9 +675,8 @@ class Training extends Component {
                         setStepDescription={this.setStepDescription}
                     />
                     <div className={'footer'}>
-                        <button onClick={this.updateChart}>update</button>
-                        <button onClick={this.drawFirstMatrix}>draw first matrix</button>
-                        <button onClick={this.drawSecondMatrix}>draw second matrix</button>
+                        {/*<button onClick={this.drawFirstMatrix}>draw first matrix</button>*/}
+                        {/*<button onClick={this.drawSecondMatrix}>draw second matrix</button>*/}
                     </div>
                 </div>
             </div>

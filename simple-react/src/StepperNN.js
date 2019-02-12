@@ -22,42 +22,15 @@ const styles = theme => ({
     },
 });
 
-function getSteps() {
-    return ['Multiple input with weight', 'Multiple output with weight', 'Deviation of error', 'Summary error',
-        'Deviation of Sigmoid 1', 'Deviation of Sigmoid 2', 'Correction 1', 'Correction 2',  'Weight correction 1', 'Weight correction 2'];
-}
-
-// function getStepContent(step) {
-//     switch (step) {
-//         case 0:
-//             return String.raw`\overrightarrow{O^1} = S(\overrightarrow{O}, W_1)`;
-//         case 1:
-//             return String.raw`\overrightarrow{O^2} = S(\overrightarrow{O^1}, W_2)`;
-//         case 2:
-//             return String.raw`\overrightarrow{e} = \begin{pmatrix} O^2_1 - t_1 \\ O^2_2 - t_2 \\ \vdots \\ O^2_m - t_m \\ \end{pmatrix}`;
-//         case 3:
-//             return String.raw`E = \frac{1}{2}\{(O^2_1 - t_1)^2 + (O^2_2 - t_2)^2 + ... +(O^2_m - t_m)^2\}`;
-//         case 4:
-//             return String.raw`D_2 = \begin{pmatrix} O^2_1(1 - O^2_1) & \cdots & \cdots \\ \cdots & O^2_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^2_m(1 - O^2_m)\\ \end{pmatrix}`;
-//         case 5:
-//             return String.raw`D_1 = \begin{pmatrix} O^1_1(1 - O^1_1) & \cdots & \cdots \\ \cdots & O^1_2(1 - O^2_2) & \cdots \\ \cdots & \cdots & O^1_k(1 - O^1_k)\\ \end{pmatrix}`;
-//         case 6:
-//             return String.raw`\overrightarrow{\delta^2} = D_2 * \overrightarrow{e}`;
-//         case 7:
-//             return String.raw`\overrightarrow{\delta^1} = D_1 * W_2 * \overrightarrow{e}`;
-//         case 8:
-//             return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
-//         case 9:
-//             return String.raw`\overrightarrow{\Delta w_1^T} = - \gamma * \overrightarrow{\delta^1}`;
-//         default:
-//             return 'learning rate step';
-//     }
-// }
-
 class StepperNN extends React.Component {
     state = {
         activeStep: 0,
         completed: new Set(),
+    };
+
+    getSteps = () => {
+        return ['Initial', 'Multiple input with weight', 'Multiple output with weight', 'Deviation of error', 'Summary error',
+            'Deviation of Sigmoid 1', 'Deviation of Sigmoid 2', 'Correction 1', 'Correction 2',  'Weight correction 1', 'Weight correction 2'];
     };
 
     setStep = (activeStep) => {
@@ -97,7 +70,7 @@ class StepperNN extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const steps = getSteps();
+        const steps = this.getSteps();
         const { activeStep } = this.state;
 
         return (
