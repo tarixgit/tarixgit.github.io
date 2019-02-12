@@ -73,16 +73,21 @@ class Training extends Component {
                     head: 'Welcome to visualisation of Neural network algorithm',
                     body: (<div>
                         <p>
-                            {'The neural network consist of neurons and connection between neurons. Neurons are here nodes. ' +
-                            'Connection are edges. As input we become some features about object and output told us to which group belong this object(in case of classification).'}
+                            {'The neural network consists of neurons and connections between neurons. Neurons are here nodes. ' +
+                            'Connection are edges. As input we become some features about the given object. Output can show us to which group this object belongs (if aim of NN is classification).'}
                         </p>
                         <p>
-                            {'The most popular problems that tried to be solved with Neural Network(NN) is classification, ' +
+                            {'The most popular problem that has been tried to be solved with Neural Network(NN) is classification, ' +
                             'for example classification of handwritten numbers. ' +
-                            'At the initial phase we take the input data and prepare this for the  algorithm and generate the weights randomly between 0 and 1.'}
+                            'At the initial phase we take the input data and prepare this for the algorithm of NN and ' +
+                            'generate the weights for each data element randomly between 0 and 1.'}
                         </p>
                         <p>
-                            {'As features we take here every pixels of image and transform this to the range between 0 and 1.'}
+                            {'We\'ll show you how the NN algorithm will work on example of recognition of number 1' +
+                            ' As features we take here every pixels of image and transform this to the range between 0 and 1.'}
+                        </p>
+                        <p>
+                            {'Here we show you the first part - training'}
                         </p>
                     </div>)
 
