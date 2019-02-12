@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import { renderToStaticMarkup } from 'react-dom/server'
 import {withStyles} from '@material-ui/core/styles';
 import './Trainig.css';
 import StepperNN from './StepperNN';
-import MathJax from 'mathjax';
+//import MathJax from 'mathjax';
 import Typography from "@material-ui/core/es/Typography/Typography";
+import Modal from '@material-ui/core/Modal';
 const { Provider, Node } = require("@nteract/mathjax");
-//const MathJax = require('mathjax');
 const d3 = require('d3');
-// const {Queue} = MathJax.Hub;
-// Queue(["Typeset",MathJax.Hub]);
-//MathJax.Hub.Config({tex2jax:{inlineMath:[['$','$'],['\\(','\\)']]}});
 
-const styles = {
+const styles = theme => ({
     root: {
         width: 300,
     },
@@ -28,7 +25,15 @@ const styles = {
         width: 'auto',
         height: 'auto  '
     },
-};
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+        outline: 'none',
+    },
+});
 
 class Training extends Component {
      constructor(props) {
@@ -50,7 +55,8 @@ class Training extends Component {
             currentDescription: this.getStepDescription(0),
             currentStep: 0,
             matrixSvgOne: null,
-            matrixSvgTwo: null
+            matrixSvgTwo: null,
+            isModalOpen: false
         };
     }
 
@@ -639,30 +645,29 @@ class Training extends Component {
         this.setState({matrixSvgTwo});
     };
 
+    openExplanationModal = () => {
+        this.setState({ isModalOpen: true });
+    };
+
+    closeExplanationModal = () => {
+        this.setState({ isModalOpen: false });
+    };
+
     render() {
         const { classes } = this.props;
         return (
             <div className='App'>
                 <header className='App-header'>
-                    {/*<div>
-                        Visualisation of neural network
-                    </div>*/}
                     <Typography variant="h4" gutterBottom>
                         Visualisation of neural network
                     </Typography>
                     <div className={'small'}>The whole algorithm consist only of 10 simple steps.</div>
                 </header>
                 <div className='Main-container'>
-                    <div className='matrix'>
-{/*                        <h2>
-                            {this.state.currentDescription.head}
-                        </h2>*/}
+                    {/*<div className='matrix'>
                         <Typography variant="h6" align="center"  gutterBottom style={{fontWeight: '400'}}>
                             {this.state.currentDescription.head}
                         </Typography>
-{/*                        <div>
-                            {this.state.currentDescription.body}
-                        </div>*/}
                         <Typography variant="body2" gutterBottom style={{fontWeight: '300'}}>
                             {this.state.currentDescription.body}
                         </Typography>
@@ -673,7 +678,7 @@ class Training extends Component {
                                 </p>
                             </Provider>
                         </Typography>
-                    </div>
+                    </div>*/}
                     <div className='d3body'>
                         <div ref={refVis => (this.refVis = refVis)}>
                             <div style={{display: 'none'}} ref={refVis => (this.refVisTempOne = refVis)}>
@@ -693,11 +698,35 @@ class Training extends Component {
                     </div>
                     <StepperNN
                         setStepDescription={this.setStepDescription}
+                        openExplanationModal={this.openExplanationModal}
                     />
-                    <div className={'footer'}>
-                        {/*<button onClick={this.drawFirstMatrix}>draw first matrix</button>*/}
-                        {/*<button onClick={this.drawSecondMatrix}>draw second matrix</button>*/}
-                    </div>
+                    {/*TODO move this out ot separate component*/}
+                    <Modal
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                        open={this.state.isModalOpen}
+                        onClose={this.closeExplanationModal}
+                    >
+                        <div style={{
+                            top: `50%`,
+                            left: `60%`,
+                            transform: `translate(-50%, -60%)`,
+                        }} className={classes.paper}>
+                            <Typography variant="h6" id="modal-title">
+                                {this.state.currentDescription.head}
+                            </Typography>
+                            <Typography variant="subtitle1" id="simple-modal-description">
+                                {this.state.currentDescription.body}
+                            </Typography>
+                            <Typography className={classes.instructions} align={"center"}>
+                                <Provider>
+                                    <p>
+                                        <Node inline>{this.state.currentStepFormula}</Node>
+                                    </p>
+                                </Provider>
+                            </Typography>
+                        </div>
+                    </Modal>
                 </div>
             </div>
         );

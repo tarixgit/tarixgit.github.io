@@ -103,6 +103,12 @@ class StepperNN extends React.Component {
                         <div>
                             <div>
                                 <Button
+                                    onClick={this.props.openExplanationModal}
+                                    className={classes.button}
+                                >
+                                    Show explanations
+                                </Button>
+                                <Button
                                     disabled={activeStep === 0}
                                     onClick={this.handleBack}
                                     className={classes.button}
