@@ -39,6 +39,9 @@
 .matrix {
     width: 23%;
     float: left;
+    /*position: absolute;*/
+    /*background: white;*/
+    /*height: xxxx;*/
 }
 
 .Main-container {
