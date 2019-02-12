@@ -30,7 +30,7 @@ class StepperNN extends React.Component {
 
     getSteps = () => {
         return ['Initial', 'Multiple input with weight', 'Multiple output with weight', 'Deviation of error', 'Summary error',
-            'Deviation of Sigmoid 1', 'Deviation of Sigmoid 2', 'Correction 1', 'Correction 2',  'Weight correction 1', 'Weight correction 2'];
+            'Deviation of Sigmoid 1', 'Deviation of Sigmoid 2', 'Correction coeff. 1', 'Correction coeff. 2',  'Weight correction 1', 'Weight correction 2'];
     };
 
     setStep = (activeStep) => {
@@ -89,11 +89,11 @@ class StepperNN extends React.Component {
                         );
                     })}
                 </Stepper>
-                <div>
+                <div className={'stepButton'}>
                     {activeStep === steps.length ? (
                         <div>
                             <Typography className={classes.instructions}>
-                                All steps completed - you&apos;re finished
+                                One cycle of trainin completed - algo take the next Data and start again.
                             </Typography>
                             <Button onClick={this.handleReset} className={classes.button}>
                                 Reset

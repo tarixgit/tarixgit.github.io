@@ -189,7 +189,7 @@ class Training extends Component {
                 };
             case 9:
                 return {
-                    head: 'Welcome to visualisation of Neural network algorithm',
+                    head: 'Correction coefficient 1',
                     body: (<div>
                         <p>
                             {''}
@@ -199,7 +199,7 @@ class Training extends Component {
                 };
             case 10:
                 return {
-                    head: 'Welcome to visualisation of Neural network algorithm',
+                    head: 'Correction coefficient 2',
                     body: (<div>
                         <p>
                             {''}
@@ -207,8 +207,19 @@ class Training extends Component {
                     </div>)
 
                 };
+            case 11:
+                return {
+                    head: 'One cycle of training completed',
+                    body: (<div>
+                        <p>
+                            {'After the processing of one picture/data element is completed, algorithm take the next data and' +
+                            ' start the same process again.'}
+                        </p>
+                    </div>)
+
+                };
             default:
-                return 'learning rate step';
+                return 'Algo take the next Data and start again.';
         }
     };
 
@@ -236,8 +247,10 @@ class Training extends Component {
                 return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
             case 10:
                 return String.raw`\overrightarrow{\Delta w_1^T} = - \gamma * \overrightarrow{\delta^1}`;
+            case 11:
+                return '';
             default:
-                return 'learning rate step';
+                return '';
         }
     };
 
@@ -274,8 +287,10 @@ class Training extends Component {
                 return String.raw`\overrightarrow{\Delta w_2^T} = - \gamma * \overrightarrow{\delta^2}`;
             case 10:
                 return String.raw`\overrightarrow{\Delta w_1^T} = - \gamma * \overrightarrow{\delta^1}`;
+            case 11:
+                return '';
             default:
-                return 'learning rate step';
+                return '';
         }
     }
 
