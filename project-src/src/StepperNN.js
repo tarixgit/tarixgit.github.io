@@ -40,27 +40,27 @@ class StepperNN extends React.Component {
     handleNext = () => {
         const { activeStep } = this.state;
         const currentStep = activeStep + 1;
-        this.props.setStepDescription(currentStep);
+        this.props.setStep(currentStep);
         this.setStep(currentStep);
     };
 
     handleBack = () => {
         const { activeStep } = this.state;
         const currentStep = activeStep - 1;
-        this.props.setStepDescription(currentStep);
+        this.props.setStep(currentStep);
         this.setStep(currentStep);
     };
 
     handleStep = step => () => {
         const currentStep = step;
-        this.props.setStepDescription(currentStep);
+        this.props.setStep(currentStep);
         this.setStep(currentStep);
     };
 
 
     handleReset = () => {
         const currentStep = 0;
-        this.props.setStepDescription(currentStep);
+        this.props.setStep(currentStep);
         this.setStep(currentStep);
     };
 

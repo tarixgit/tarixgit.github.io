@@ -39,6 +39,7 @@ class Training extends Component {
      constructor(props) {
         super(props);
         this.state = {
+            oneInArr: [0,0,1,0,1,1,1,0,1,0,0,1,0,0,1],
             counter: 0,
             width: 1200,
             height: 400,
@@ -65,7 +66,7 @@ class Training extends Component {
         const svgGraph = svg.append('svg');
         const matrixSvg = svg.append('svg')
             .attr('x', 20)
-            .attr('y', 50);
+            .attr('y', 20);
         this.drawFirstMatrix(matrixSvg);
         this.setState({svg, svgGraph, matrixSvg});
         this.updateChart(null, svgGraph);
@@ -305,10 +306,11 @@ class Training extends Component {
         }
     }
 
-    updateMatrix = (step, matrixSvg) => {
+    updateMatrixView = (step, matrixSvg) => {
+        const data = this.prepareMatrixData(5, 3, this.state.oneInArr);
         switch (step) {
             case 0: {
-                this.drawFirstMatrix(matrixSvg);
+                this.drawOne(matrixSvg, data, 28, 50);
                 return;
             }
             case 1: {
@@ -331,7 +333,7 @@ class Training extends Component {
         }
     }
 
-    setStepDescription = (currentStep) => {
+    setStep = (currentStep) => {
         const currentStepFormula = this.getStepContent(currentStep);
         const currentDescription = this.getStepDescription(currentStep);
         const {descrFormulaOne, descrFormulaTwo} = this.getStepFormulaDescription(currentStep);
@@ -349,12 +351,7 @@ class Training extends Component {
         } else {
             return;
         }
-        this.updateMatrix(currentStep, matrixSvg);
-    };
-
-    onSliderChange = (event, selectedStep) => {
-        this.setState({selectedStep});
-        return;
+        this.updateMatrixView(currentStep, matrixSvg);
     };
 
     updateChart = (e, svgNew) => {
@@ -449,14 +446,15 @@ class Training extends Component {
         });
     };
 
-    prepareMatrixData = (matrixRows, matrixColumns) => {
+    prepareMatrixData = (matrixRows, matrixColumns, inputData) => {
+        //TODO inputData - is vector or matrix
         const data = [];
         let xpos = 1; //starting xpos and ypos at 1 so the stroke will show when we make the grid below
         let ypos = 1;
         const width = this.state.widthOfCell;
         const height = this.state.heightOfCell;
         const click = 0;
-
+        let index = 0;
         // iterate for rows
         for (let row = 0; row < matrixRows; row++) {
             data.push([]);
@@ -469,9 +467,10 @@ class Training extends Component {
                     width: width,
                     height: height,
                     click: click,
-                    value: 0.1
+                    value: inputData ? inputData[index] : 0.1
                 });
                 // increment the x position. I.e. move it over by 50 (width variable)
+                index ++;
                 xpos += width;
             }
             // reset the x position after a row is complete
@@ -482,16 +481,28 @@ class Training extends Component {
         return data;
     };
 
-    drawRoundBracket = (svg, x1, y1, x2, y2) => {
+    drawRoundBracket = (svg, x1, y1, x2, y2, dx) => {
+        // svg.append('path')
+        //     .attr('d', 'M ' + x1 +' '+ y1 + ' q -45 ' + dx/2 + ' 0 ' + dx + ' M ' + x1 +' '+ y1 + ' q -40 ' + dx/2 + ' 0 ' + dx)
+        //     .attr('stroke', 'black')
+        //     .attr('stroke-width', '2')
+        //     .attr('fill', 'black');
+        // svg.append('path')
+        //     .attr('d', 'M ' + x2 +' '+ y2 + ' q 45 ' + dx/2 + ' 0 ' + dx + ' M ' + x2 +' '+ y2 + ' q 40 ' + dx/2 + ' 0 ' + dx)
+        //     .attr('stroke', 'black')
+        //     .attr('stroke-width', '2')
+        //     .attr('fill', 'none');
         svg.append('path')
-            .attr('d', 'M ' + x1 +' '+ y1 + ' q -45 100' + ' 0  200 M ' + x1 +' '+ y1 + ' q -40 100' + ' 0 200')
+            .attr('d', 'M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dx/3) + ' ' + (x1-30) + ',' + (y1 + dx*2/3)  + ' ' + x1 + ',' + (y1+dx)
+                + ' M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dx/3) + ' ' + (x1-30) + ',' + (y1 + dx*2/3)  + ' ' + x1 + ',' + (y1+dx))
             .attr('stroke', 'black')
-            .attr('stroke-width', '3')
+            .attr('stroke-width', '2')
             .attr('fill', 'none');
         svg.append('path')
-            .attr('d', 'M ' + x2 +' '+ y2 + ' q 45 100' + ' 0 200 M ' + x2 +' '+ y2 + ' q 40 100' + ' 0 200')
+            .attr('d', 'M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dx/3) + ' ' + (x2+30) + ',' + (y2 + dx*2/3)  + ' ' + x2 + ',' + (y2+dx)
+                + ' M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dx/3) + ' ' + (x2+30) + ',' + (y2 + dx*2/3)  + ' ' + x2 + ',' + (y2+dx))
             .attr('stroke', 'black')
-            .attr('stroke-width', '3')
+            .attr('stroke-width', '2')
             .attr('fill', 'none');
     };
 
@@ -519,12 +530,15 @@ class Training extends Component {
         ;
     };
 
-    drawFirstMatrix = (matrixSvg) => {
+    drawFirstMatrix = (matrixSvg, ritgh) => {
+        const x = 28;
+        const y = 50;
+        const numberOfrows = 15;
         const width = this.state.widthOfCell;
-        const data = this.prepareMatrixData(9, 1); //TODO
-        this.drawRoundBracket(matrixSvg, 28, 50, 28 + width, 50);
-        this.drawMatrixDescr(matrixSvg, 28, 15, width, this.refVisTempOne);
-        const matrixSvgOne = this.drawMatrix(matrixSvg, data, 28, 60);
+        const data = this.prepareMatrixData(numberOfrows, 1); //TODO
+        this.drawRoundBracket(matrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
+        this.drawMatrixDescr(matrixSvg, x, y/2 -5, width, this.refVisTempOne);
+        const matrixSvgOne = this.drawMatrix(matrixSvg, data, x, y);
         this.setState({matrixSvgOne});
     };
 
@@ -535,7 +549,7 @@ class Training extends Component {
         const numberOfOutputNeuron = this.state.numberOfOutputNeuron;
         const data = this.prepareMatrixData(numberOfInputNeuron, numberOfOutputNeuron);
         this.drawKreuz(matrixSvg, 28 + width + (128 - (28 + width))/2, 60 + 9*heightOfCell / 2);
-        this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfInputNeuron), 50);
+        this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfInputNeuron), 50, heightOfCell * (numberOfInputNeuron + 1));
         this.drawMatrixDescr(matrixSvg, 128, 25, (width*9), this.refVisTempTwo);
         const matrixSvgTwo = this.drawMatrix(matrixSvg, data, 128, 60);
         this.setState({matrixSvgTwo});
@@ -596,6 +610,33 @@ class Training extends Component {
         return newMatrixSvg;
     };
 
+    drawOne = (matrixSvg, data, x, y) => {
+        const newMatrixSvg =  matrixSvg.append('svg')
+            .attr('x', x)  //28
+            .attr('y', y);   //10
+        const row = newMatrixSvg.selectAll('.row')
+            .data(data)
+            .enter().append('g')
+            .attr('class', 'row');
+
+        const cell = row.selectAll('.cell')
+            .data(d => d)
+            .enter().append('g')
+            .attr('class', 'cell');
+
+        cell.append('rect')
+            .attr('class', 'square')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            .attr('width', d => d.width)
+            .attr('height', d => d.height)
+            .style('stroke', '#222')
+            .style("stroke-opacity", .9)
+            .style('fill', d =>  d.value === 1 ? '#47BA36' : '#fff');
+
+        return newMatrixSvg;
+    };
+
     openExplanationModal = () => {
         this.setState({ isModalOpen: true });
     };
@@ -633,7 +674,7 @@ class Training extends Component {
                         </div>
                     </div>
                     <StepperNN
-                        setStepDescription={this.setStepDescription}
+                        setStep={this.setStep}
                         openExplanationModal={this.openExplanationModal}
                     />
                     {/*TODO move this out ot separate component*/}
