@@ -42,12 +42,14 @@ class Training extends Component {
             oneInArr: [0,0,1,0,1,1,1,0,1,0,0,1,0,0,1],
             counter: 0,
             width: 1200,
-            height: 400,
+            height: 620,
             radius: 18,
             widthOfCell: 20,
             heightOfCell: 20,
-            numberOfInputNeuron: 9,
+            widthOfDesr: 35,
+            numberOfInputNeuron: 15,
             numberOfOutputNeuron: 9,
+            numberOfNeuronInHiddenLayer: 9,
             hiddenLayers: 1,
             selectedStep: 0,
             descrFormulaOne: String.raw`\overrightarrow{O}`,
@@ -67,11 +69,18 @@ class Training extends Component {
         const matrixSvg = svg.append('svg')
             .attr('x', 20)
             .attr('y', 20);
-        this.drawFirstMatrix(matrixSvg);
+        //this.drawFirstMatrix(matrixSvg);
         this.setState({svg, svgGraph, matrixSvg});
         this.updateChart(null, svgGraph);
-        // MathJax.Hub.Queue(["Typeset",MathJax.Hub, root]);
+        this.setStep(0, matrixSvg);
     }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     //this.updateChart(null, this.state.svgGraph);
+    //     if (!!prevState.matrixSvg) {
+    //         this.setStep(0);
+    //     }
+    // }
 
     getStepDescription = (step) => {
         switch (step) {
@@ -306,11 +315,26 @@ class Training extends Component {
         }
     }
 
-    updateMatrixView = (step, matrixSvg) => {
-        const data = this.prepareMatrixData(5, 3, this.state.oneInArr);
+    updateLeftView = (step, matrixSvg) => {
         switch (step) {
             case 0: {
-                this.drawOne(matrixSvg, data, 28, 50);
+                const numberOfrows = this.state.numberOfInputNeuron;
+                const sizeOfPicture = {h:5, w:3}
+                const data = this.prepareMatrixData(sizeOfPicture.h, sizeOfPicture.w, this.state.oneInArr); //TODO use constant
+                const dataFirstMatrix = this.prepareMatrixData(numberOfrows, 1, this.state.oneInArr);
+                const y = this.state.widthOfDesr;
+                const coordX = 28;
+                const coordY = 50;
+                const {widthOfCell, heightOfCell} = this.state;
+                this.drawOneDescr(matrixSvg, coordX, coordY, sizeOfPicture.w * widthOfCell, heightOfCell);
+                this.drawOne(matrixSvg, data, coordX, coordY, 500);
+                this.drawArrowDown(matrixSvg, coordX + (sizeOfPicture.w * widthOfCell / 2), coordY + (sizeOfPicture.h + 1) * heightOfCell, 1500);
+                this.drawOneAsMatrix(matrixSvg, data, coordX, coordY + sizeOfPicture.h*heightOfCell + 50, 2500);
+                this.drawArrowRight(matrixSvg, coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
+                    (heightOfCell * sizeOfPicture.h/2), 3500);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 100, y, 4500);
+                this.drawArrowRight(matrixSvg, 200 + coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
+                    (heightOfCell * sizeOfPicture.h/2), 5500); //200 - is not calculated
                 return;
             }
             case 1: {
@@ -333,7 +357,7 @@ class Training extends Component {
         }
     }
 
-    setStep = (currentStep) => {
+    setStep = (currentStep, svg) => {
         const currentStepFormula = this.getStepContent(currentStep);
         const currentDescription = this.getStepDescription(currentStep);
         const {descrFormulaOne, descrFormulaTwo} = this.getStepFormulaDescription(currentStep);
@@ -345,13 +369,13 @@ class Training extends Component {
             descrFormulaTwo: descrFormulaTwo
         });
 
-        const matrixSvg = this.state.matrixSvg;
+        const matrixSvg = !!svg ? svg : this.state.matrixSvg;
         if (!!matrixSvg) {
             matrixSvg.selectAll("*").remove();
         } else {
             return;
         }
-        this.updateMatrixView(currentStep, matrixSvg);
+        this.updateLeftView(currentStep, matrixSvg);
     };
 
     updateChart = (e, svgNew) => {
@@ -481,26 +505,26 @@ class Training extends Component {
         return data;
     };
 
-    drawRoundBracket = (svg, x1, y1, x2, y2, dx) => {
+    drawRoundBracket = (svg, x1, y1, x2, y2, dy) => {
         // svg.append('path')
-        //     .attr('d', 'M ' + x1 +' '+ y1 + ' q -45 ' + dx/2 + ' 0 ' + dx + ' M ' + x1 +' '+ y1 + ' q -40 ' + dx/2 + ' 0 ' + dx)
+        //     .attr('d', 'M ' + x1 +' '+ y1 + ' q -45 ' + dy/2 + ' 0 ' + dy + ' M ' + x1 +' '+ y1 + ' q -40 ' + dy/2 + ' 0 ' + dy)
         //     .attr('stroke', 'black')
         //     .attr('stroke-width', '2')
         //     .attr('fill', 'black');
         // svg.append('path')
-        //     .attr('d', 'M ' + x2 +' '+ y2 + ' q 45 ' + dx/2 + ' 0 ' + dx + ' M ' + x2 +' '+ y2 + ' q 40 ' + dx/2 + ' 0 ' + dx)
+        //     .attr('d', 'M ' + x2 +' '+ y2 + ' q 45 ' + dy/2 + ' 0 ' + dy + ' M ' + x2 +' '+ y2 + ' q 40 ' + dy/2 + ' 0 ' + dy)
         //     .attr('stroke', 'black')
         //     .attr('stroke-width', '2')
         //     .attr('fill', 'none');
         svg.append('path')
-            .attr('d', 'M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dx/3) + ' ' + (x1-30) + ',' + (y1 + dx*2/3)  + ' ' + x1 + ',' + (y1+dx)
-                + ' M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dx/3) + ' ' + (x1-30) + ',' + (y1 + dx*2/3)  + ' ' + x1 + ',' + (y1+dx))
+            .attr('d', 'M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dy/3) + ' ' + (x1-30) + ',' + (y1 + dy*2/3)  + ' ' + x1 + ',' + (y1+dy)
+                + ' M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dy/3) + ' ' + (x1-30) + ',' + (y1 + dy*2/3)  + ' ' + x1 + ',' + (y1+dy))
             .attr('stroke', 'black')
             .attr('stroke-width', '2')
             .attr('fill', 'none');
         svg.append('path')
-            .attr('d', 'M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dx/3) + ' ' + (x2+30) + ',' + (y2 + dx*2/3)  + ' ' + x2 + ',' + (y2+dx)
-                + ' M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dx/3) + ' ' + (x2+30) + ',' + (y2 + dx*2/3)  + ' ' + x2 + ',' + (y2+dx))
+            .attr('d', 'M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dy/3) + ' ' + (x2+30) + ',' + (y2 + dy*2/3)  + ' ' + x2 + ',' + (y2+dy)
+                + ' M ' + x2 +' '+ y2 + ' C ' + (x2+30) + ',' + (y2 + dy/3) + ' ' + (x2+30) + ',' + (y2 + dy*2/3)  + ' ' + x2 + ',' + (y2+dy))
             .attr('stroke', 'black')
             .attr('stroke-width', '2')
             .attr('fill', 'none');
@@ -508,7 +532,7 @@ class Training extends Component {
 
     drawKreuz = (svg, x, y) => {
         svg.append('svg')
-            .attr('x', x - 10)
+            .attr('x', x - 10) //from size of kreuz
             .attr('y', y - 20)
             .append('path')
             .attr('d', 'M20,0 L0,40 M0,0 L20,40')
@@ -522,7 +546,7 @@ class Training extends Component {
         const widthOfDescr = 9; //TODO take this from selector
         svg.append("svg")
             .attr('x', x + halfWidth - widthOfDescr)
-            .attr('y', y)
+            .attr('y', y - 35)
             .attr("width", 35)
             .attr("height", 35)
             .append("foreignObject").attr("width",35).attr("height",35)
@@ -530,26 +554,36 @@ class Training extends Component {
         ;
     };
 
-    drawFirstMatrix = (matrixSvg, ritgh) => {
-        const x = 28;
-        const y = 50;
-        const numberOfrows = 15;
+    drawFirstMatrix = (matrixSvg, dataFirstMatrix, x_coord, y_coord, delay) => {
+        const newMatrixSvg =  matrixSvg.append('svg')
+            .attr('x', 0)  //28
+            .attr('y', 0)
+            .style('opacity', !!delay ? .0 : 1);
+        const x = x_coord ? x_coord: 28;
+        const y = y_coord ? y_coord: 50;
+        const numberOfrows = this.state.numberOfInputNeuron;
         const width = this.state.widthOfCell;
-        const data = this.prepareMatrixData(numberOfrows, 1); //TODO
-        this.drawRoundBracket(matrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
-        this.drawMatrixDescr(matrixSvg, x, y/2 -5, width, this.refVisTempOne);
-        const matrixSvgOne = this.drawMatrix(matrixSvg, data, x, y);
+        const data = dataFirstMatrix ? dataFirstMatrix : this.prepareMatrixData(numberOfrows, 1); //TODO
+        this.drawRoundBracket(newMatrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
+        this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
+        const matrixSvgOne = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgOne});
+
+        newMatrixSvg.transition()
+            .delay(delay)
+            .duration(1000)
+            .style('opacity', .9);
     };
 
     drawSecondMatrix = (matrixSvg) => {
         const width = this.state.widthOfCell;
         const heightOfCell = this.state.heightOfCell;
         const numberOfInputNeuron = this.state.numberOfInputNeuron;
-        const numberOfOutputNeuron = this.state.numberOfOutputNeuron;
-        const data = this.prepareMatrixData(numberOfInputNeuron, numberOfOutputNeuron);
+        const numberOfNeuronInHiddenLayer = this.state.numberOfNeuronInHiddenLayer;
+
+        const data = this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer);
         this.drawKreuz(matrixSvg, 28 + width + (128 - (28 + width))/2, 60 + 9*heightOfCell / 2);
-        this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfInputNeuron), 50, heightOfCell * (numberOfInputNeuron + 1));
+        this.drawRoundBracket(matrixSvg, 128, 50, 128 + (width*numberOfNeuronInHiddenLayer), 50, heightOfCell * (numberOfInputNeuron + 1));
         this.drawMatrixDescr(matrixSvg, 128, 25, (width*9), this.refVisTempTwo);
         const matrixSvgTwo = this.drawMatrix(matrixSvg, data, 128, 60);
         this.setState({matrixSvgTwo});
@@ -610,10 +644,26 @@ class Training extends Component {
         return newMatrixSvg;
     };
 
-    drawOne = (matrixSvg, data, x, y) => {
+    drawOneDescr = (matrixSvg, x, y, width, height) => {
+        const newMatrixSvg =  matrixSvg.append('svg')
+            .attr('x', x - 10)
+            .attr('y', y - height)
+            .attr('height', 30)
+            .attr('width', 200)
+            .append('text')
+            .text('Input image')
+            .attr('x', 0)
+            .attr('y', 15)
+            .style('fill', '#000');
+
+        return newMatrixSvg;
+    };
+
+    drawOne = (matrixSvg, data, x, y, delay) => {
         const newMatrixSvg =  matrixSvg.append('svg')
             .attr('x', x)  //28
-            .attr('y', y);   //10
+            .attr('y', y)
+            .style('opacity', .0);
         const row = newMatrixSvg.selectAll('.row')
             .data(data)
             .enter().append('g')
@@ -630,11 +680,91 @@ class Training extends Component {
             .attr('y', d => d.y)
             .attr('width', d => d.width)
             .attr('height', d => d.height)
-            .style('stroke', '#222')
-            .style("stroke-opacity", .9)
+            .style('stroke', '#000000')
             .style('fill', d =>  d.value === 1 ? '#47BA36' : '#fff');
 
+        newMatrixSvg.transition()
+            .delay(delay)
+            .duration(1000)
+            .style('opacity', .9);
+
         return newMatrixSvg;
+    };
+
+    drawOneAsMatrix = (matrixSvg, data, x, y, delay) => {
+        const newMatrixSvg =  matrixSvg.append('svg')
+            .attr('x', x)  //28
+            .attr('y', y)
+            .style('opacity', .0);
+        const row = newMatrixSvg.selectAll('.row')
+            .data(data)
+            .enter().append('g')
+            .attr('class', 'row');
+
+        const cell = row.selectAll('.cell')
+            .data(d => d)
+            .enter().append('g')
+            .attr('class', 'cell');
+
+        cell.append('svg')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            .attr('width', d => d.width)
+            .attr('height', d => d.height)
+            .append('text').text(d => d.value)
+            .attr('x', '50%')
+            .attr('y', '50%')
+            .attr('alignment-baseline', 'middle')
+            .attr('text-anchor', 'middle')
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "12px")
+            .style('fill', d =>  d.value === 1 ? '#47BA36' : '#979797');
+
+        newMatrixSvg.transition()
+            .delay(delay)
+            .duration(1000)
+            .style('opacity', .9);
+
+        return newMatrixSvg;
+    };
+
+    drawArrowDown = (svg, x, y, delay) => {
+        const arrow = svg.append('svg')
+            .attr('x', x - 5)
+            .attr('y', y - 15)
+            .style('opacity', .0);
+            // .attr('width', 10)
+            // .attr('height', 42)
+        arrow.append('path')
+            .attr('d', 'M4.5,32.5 L4.5,1 L4.5,0.5 L5.5,0.5 L5.5,1 L5.5,32.5 L9.5,32.5 L5,41.5 L0.5,32.5 L4.5,32.5 Z')
+            .attr('fill', '#979797')
+            .attr('fill-rule', '#nonzero')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '1');
+
+        arrow.transition()
+            .delay(delay)
+            .duration(1000)
+            .style('opacity', .9);
+    };
+
+    drawArrowRight = (svg, x, y, delay) => {
+        const arrow = svg.append('svg')
+            .attr('x', x + 15)
+            .attr('y', y - 5)
+            .style('opacity', .0);
+            // .attr('width', 10)
+            // .attr('height', 42)
+        arrow.append('path')
+            .attr('d', 'M32.5,5.5 L1,5.5 L0.5,5.5 L0.5,4.5 L1,4.5 L32.5,4.5 L32.5,0.5 L41.5,5 L32.5,9.5 L32.5,5.5 Z')
+            .attr('fill', '#979797')
+            .attr('fill-rule', '#nonzero')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '1');
+        arrow.transition()
+            .delay(delay)
+            .duration(1000)
+            .style('opacity', .9);
     };
 
     openExplanationModal = () => {
