@@ -347,15 +347,17 @@ class Training extends Component {
                 const coordX = 28;
                 const coordY = 50;
                 const {widthOfCell, heightOfCell, dataFirstMatrix} = this.state;
+                const yPosition = svgInput.attr('y');
                 this.moveSvgInput(svgInput, coordX + 20, coordY + 2, sizeOfPicture, widthOfCell, 200);
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 1200);
-                this.drawSecondMatrix(matrixSvg, null, 128, 60, 3000);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200);
+                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500);
                 return;
             }
             case 2: {
                 const {dataFirstMatrix} = this.state;
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 1200);
-                this.drawSecondMatrix(matrixSvg, null, 128, 60, 3000);
+                const yPosition = svgInput.attr('y');
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200);
+                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500);
                 return;
             }
             case 3: {
