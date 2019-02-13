@@ -71,8 +71,8 @@ class Training extends Component {
             .attr('y', 20);
         //this.drawFirstMatrix(matrixSvg);
         this.setState({svg, svgGraph, matrixSvg});
-        this.updateChart(null, svgGraph);
-        this.setStep(0, matrixSvg);
+        this.updateChart(svgGraph);
+        this.setStep(0, matrixSvg, svgGraph);
     }
 
     // componentDidUpdate(prevProps, prevState) {
@@ -315,7 +315,7 @@ class Training extends Component {
         }
     }
 
-    updateLeftView = (step, matrixSvg) => {
+    updateLeftView = (step, matrixSvg, svgGraph) => {
         switch (step) {
             case 0: {
                 const numberOfrows = this.state.numberOfInputNeuron;
@@ -332,9 +332,10 @@ class Training extends Component {
                 this.drawOneAsMatrix(matrixSvg, data, coordX, coordY + sizeOfPicture.h*heightOfCell + 50, 2500);
                 this.drawArrowRight(matrixSvg, coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
                     (heightOfCell * sizeOfPicture.h/2), 3500);
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 100, y, 4500);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 125, y, 4500);
                 this.drawArrowRight(matrixSvg, 200 + coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
                     (heightOfCell * sizeOfPicture.h/2), 5500); //200 - is not calculated
+                this.updateChart(svgGraph, this.state.oneInArr, 6500);
                 return;
             }
             case 1: {
@@ -357,7 +358,7 @@ class Training extends Component {
         }
     }
 
-    setStep = (currentStep, svg) => {
+    setStep = (currentStep, svgNew, svgGraphNew) => {
         const currentStepFormula = this.getStepContent(currentStep);
         const currentDescription = this.getStepDescription(currentStep);
         const {descrFormulaOne, descrFormulaTwo} = this.getStepFormulaDescription(currentStep);
@@ -369,29 +370,36 @@ class Training extends Component {
             descrFormulaTwo: descrFormulaTwo
         });
 
-        const matrixSvg = !!svg ? svg : this.state.matrixSvg;
+        const matrixSvg = !!svgNew ? svgNew : this.state.matrixSvg;
+        const svgGraph = !!svgGraphNew ? svgGraphNew : this.state.svgGraph;
         if (!!matrixSvg) {
             matrixSvg.selectAll("*").remove();
         } else {
             return;
         }
-        this.updateLeftView(currentStep, matrixSvg);
+        this.updateLeftView(currentStep, matrixSvg, svgGraph);
     };
 
-    updateChart = (e, svgNew) => {
+    updateChart = (svgNew, inputData, delay) => {
         // Define the div for the tooltip
         const mschubY = 40;
         const schubX = 300;
         const firstXCoordinate = 450;
-        const svgGraph = svgNew ? svgNew : this.state.svg;
+        const svgGraph = svgNew; //???
         let ipnutData = [];
         let outputData = [];
         let hiddenLayerData = [];
+        if (!!svgGraph) {
+            svgGraph.selectAll("*").remove();
+        } else {
+            return;
+        }
         //Daten vorbereiten
         for (let i = 1; i <= this.state.numberOfInputNeuron; i++) {
             ipnutData.push({
                 x: firstXCoordinate,
-                y: i * mschubY
+                y: i * mschubY,
+                neuronValue: inputData ? inputData[i-1] : null
             })
         }
         for (let i = 1; i <= this.state.numberOfOutputNeuron; i++) {
@@ -431,7 +439,8 @@ class Training extends Component {
                 .attr('stroke', 'black')
                 .style("stroke-width", 2)
                 // .style("stroke-opacity", 1)
-                .style('fill', '#47BA36')
+                .style('fill', '#FFF') //TODO !!!!!!!!
+                //.style('fill', '#47BA36') //TODO !!!!!!!!
                 .on('mouseover', d => {
                     div.transition()
                         .duration(200)
@@ -440,10 +449,13 @@ class Training extends Component {
                         .style('left', (d3.event.pageX + 10) + 'px')
                         .style('top', (d3.event.pageY - 18) + 'px');
                 }).on('mouseout', d => {
-                div.transition()
-                    .duration(500)
-                    .style('opacity', 0);
-            });
+                    div.transition()
+                        .duration(500)
+                        .style('opacity', 0);
+                }).transition()
+                .delay(delay ? delay : 0)
+                .duration(delay ? 2500 : 0)
+                .style('fill', d => d.neuronValue ? '#47BA36' : '#FFF');
         });
 
         //draw the lines
@@ -452,6 +464,8 @@ class Training extends Component {
                 return;
             }
             const accessorLayer = hiddenLayerData[layerIndex - 1];
+            // take data of weights  from accessorLayer
+            //
             const outspace = 3;
             accessorLayer.forEach(accessor => {
                 svgGraph.append('g')
@@ -506,16 +520,6 @@ class Training extends Component {
     };
 
     drawRoundBracket = (svg, x1, y1, x2, y2, dy) => {
-        // svg.append('path')
-        //     .attr('d', 'M ' + x1 +' '+ y1 + ' q -45 ' + dy/2 + ' 0 ' + dy + ' M ' + x1 +' '+ y1 + ' q -40 ' + dy/2 + ' 0 ' + dy)
-        //     .attr('stroke', 'black')
-        //     .attr('stroke-width', '2')
-        //     .attr('fill', 'black');
-        // svg.append('path')
-        //     .attr('d', 'M ' + x2 +' '+ y2 + ' q 45 ' + dy/2 + ' 0 ' + dy + ' M ' + x2 +' '+ y2 + ' q 40 ' + dy/2 + ' 0 ' + dy)
-        //     .attr('stroke', 'black')
-        //     .attr('stroke-width', '2')
-        //     .attr('fill', 'none');
         svg.append('path')
             .attr('d', 'M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dy/3) + ' ' + (x1-30) + ',' + (y1 + dy*2/3)  + ' ' + x1 + ',' + (y1+dy)
                 + ' M ' + x1 +', '+ y1 + ' C ' + (x1-30) + ',' + (y1 + dy/3) + ' ' + (x1-30) + ',' + (y1 + dy*2/3)  + ' ' + x1 + ',' + (y1+dy))
