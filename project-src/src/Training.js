@@ -339,7 +339,7 @@ class Training extends Component {
                 this.drawOneAsMatrix(matrixSvg, data, coordX, coordY + sizeOfPicture.h*heightOfCell + 50, 2500);
                 this.drawArrowRight(matrixSvg, coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
                     (heightOfCell * sizeOfPicture.h/2), 3500);
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 125, y, 4500);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 125, y, 4500, symbol.inputO);
                 this.drawArrowRight(matrixSvg, 200 + coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
                     (heightOfCell * sizeOfPicture.h/2), 5500); // = 200 - is not calculated
                 this.updateChart(svgGraph, this.state.oneInArr, 6500);
@@ -350,22 +350,22 @@ class Training extends Component {
                 const coordX = 28;
                 const coordY = 50;
                 const {widthOfCell, heightOfCell, dataFirstMatrix} = this.state;
-                const yPosition = svgInput.attr('y');
+                const yPosition = svgInput.attr('y'); //out image
                 this.moveSvgInput(svgInput, coordX + 20, coordY + 2, sizeOfPicture, widthOfCell, 200);
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200);
-                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200, symbol.inputO);
+                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500, symbol.weightW1);
                 return;
             }
             case 2: {
                 const {dataFirstMatrix} = this.state;
                 const yPosition = svgInput.attr('y');
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200);
-                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200, symbol.outputO1);
+                this.drawSecondMatrix( matrixSvg, null, 128, 60, 2500, symbol.weightW2);
                 return;
             }
             case 3: {
-                this.drawFirstMatrix(matrixSvg);
-                this.drawSecondMatrix(matrixSvg);
+                //this.drawFirstMatrix(matrixSvg);
+                //this.drawSecondMatrix(matrixSvg);
                 return;
             }
             default:
@@ -449,8 +449,10 @@ class Training extends Component {
         hiddenLayerData.push(outputData);
 
         symbol.inputO(svgSymbolsPanel, firstXCoordinate - 8, 0);
-        symbol.outputW1(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers * schubX) / 2 - 10, 0);
-
+        symbol.weightW1(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers * schubX) / 2 - 10, 0);
+        symbol.outputO1(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers) * schubX - 8, 0);
+        symbol.weightW2(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers) * schubX + this.state.hiddenLayers * schubX / 2 - 10, 0);
+        symbol.outputO2(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers + 1) * schubX - 8, 0);
         //draw the tooltip
         const div = d3.select(this.refVis).append('div')
             .attr('class', 'tooltip')
@@ -588,7 +590,7 @@ class Training extends Component {
         ;
     };
 
-    drawFirstMatrix = (matrixSvg, matrixData, x_coord, y_coord, delay) => {
+    drawFirstMatrix = (matrixSvg, matrixData, x_coord, y_coord, delay, descrFunction) => {
         const newMatrixSvg =  matrixSvg.append('svg')
             .attr('x', 0)  //28
             .attr('y', 0)
@@ -600,7 +602,7 @@ class Training extends Component {
         const data = matrixData ? matrixData : this.prepareMatrixData(numberOfrows, 1); //TODO
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
         //this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
-        symbol.inputO(newMatrixSvg, x + 2, y - 60);
+        descrFunction(newMatrixSvg, x + 2, y - 60);
         const matrixSvgOne = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgOne});
 
@@ -610,7 +612,7 @@ class Training extends Component {
             .style('opacity', .9);
     };
 
-    drawSecondMatrix = (matrixSvg,  matrixData, x_coord, y_coord, delay) => {
+    drawSecondMatrix = (matrixSvg,  matrixData, x_coord, y_coord, delay, descrFunction) => { // to think about this step
         const newMatrixSvg =  matrixSvg.append('svg')
             .attr('x', 0)  //28
             .attr('y', 0)
@@ -625,7 +627,8 @@ class Training extends Component {
         this.drawKreuz(newMatrixSvg, 28 + width + (128 - (28 + width))/2, y + numberOfInputNeuron*heightOfCell / 2);
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + (width*numberOfNeuronInHiddenLayer), y-10, heightOfCell * (numberOfInputNeuron + 1));
         //this.drawMatrixDescr(newMatrixSvg, x, y, (width*numberOfNeuronInHiddenLayer), this.refVisTempTwo, true);
-        symbol.outputW1(newMatrixSvg, x + width*numberOfNeuronInHiddenLayer/2 - 10, y - 50);
+        //draw description
+        descrFunction(newMatrixSvg, x + width*numberOfNeuronInHiddenLayer/2 - 10, y - 50);
         const matrixSvgTwo = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgTwo});
 
