@@ -5,6 +5,7 @@ import './Trainig.css';
 import StepperNN from './StepperNN';
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Modal from '@material-ui/core/Modal';
+import symbol from './symbolSVG';
 const { Provider, Node } = require("@nteract/mathjax");
 const d3 = require('d3');
 
@@ -40,7 +41,7 @@ class Training extends Component {
             oneInArr: [0,0,1,0,1,1,1,0,1,0,0,1,0,0,1],
             counter: 0,
             width: 1280,
-            height: 620,
+            height: 645,
             radius: 18,
             widthOfCell: 20,
             heightOfCell: 20,
@@ -63,7 +64,9 @@ class Training extends Component {
 
     componentDidMount(props, state, root) {
         const svg = d3.select(this.viz);
-        const svgGraph = svg.append('svg');
+        const svgGraph = svg
+            .append('svg')
+            .attr('y', -15);
         const matrixSvg = svg.append('svg')
             .attr('x', 20)
             .attr('y', 20);
@@ -400,15 +403,22 @@ class Training extends Component {
         const mschubY = 40;
         const schubX = 300;
         const firstXCoordinate = 450;
-        const svgGraph = svgNew; //???
+        const svgGraphWithSymbols = svgNew; //???
         let ipnutData = [];
         let outputData = [];
         let hiddenLayerData = [];
-        if (!!svgGraph) {
-            svgGraph.selectAll("*").remove();
+        if (!!svgGraphWithSymbols) {
+            svgGraphWithSymbols.selectAll("*").remove();
         } else {
             return;
         }
+
+        const svgGraph = svgGraphWithSymbols
+            .append('svg')
+            .attr('x', 0)
+            .attr('y', 25);
+
+        const svgSymbolsPanel = svgGraphWithSymbols.append('svg');
         //Daten vorbereiten
         for (let i = 1; i <= this.state.numberOfInputNeuron; i++) {
             ipnutData.push({
@@ -437,6 +447,9 @@ class Training extends Component {
             hiddenLayerData.push(currentLayer);
         }
         hiddenLayerData.push(outputData);
+
+        symbol.inputO(svgSymbolsPanel, firstXCoordinate - 8, 0);
+        symbol.outputW1(svgSymbolsPanel, firstXCoordinate + (this.state.hiddenLayers * schubX) / 2 - 10, 0);
 
         //draw the tooltip
         const div = d3.select(this.refVis).append('div')
@@ -581,12 +594,13 @@ class Training extends Component {
             .attr('y', 0)
             .style('opacity', !!delay ? .0 : 1);
         const x = x_coord ? x_coord: 28;
-        const y = y_coord ? y_coord: 60;
+        const y = y_coord ? y_coord + 60: 60;
         const numberOfrows = this.state.numberOfInputNeuron;
         const width = this.state.widthOfCell;
         const data = matrixData ? matrixData : this.prepareMatrixData(numberOfrows, 1); //TODO
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
-        this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
+        //this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
+        symbol.inputO(newMatrixSvg, x + 2, y - 60);
         const matrixSvgOne = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgOne});
 
@@ -602,16 +616,16 @@ class Training extends Component {
             .attr('y', 0)
             .style('opacity', !!delay ? .0 : 1);
         const x = x_coord ? x_coord: 128;
-        const y = y_coord ? y_coord: 60;
+        const y = y_coord ? y_coord + 60: 60;
         const width = this.state.widthOfCell;
         const heightOfCell = this.state.heightOfCell;
         const numberOfInputNeuron = this.state.numberOfInputNeuron;
         const numberOfNeuronInHiddenLayer = this.state.numberOfNeuronInHiddenLayer;
-
         const data = matrixData ? matrixData : this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer);
         this.drawKreuz(newMatrixSvg, 28 + width + (128 - (28 + width))/2, y + numberOfInputNeuron*heightOfCell / 2);
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + (width*numberOfNeuronInHiddenLayer), y-10, heightOfCell * (numberOfInputNeuron + 1));
-        this.drawMatrixDescr(newMatrixSvg, x, y, (width*numberOfNeuronInHiddenLayer), this.refVisTempTwo, true);
+        //this.drawMatrixDescr(newMatrixSvg, x, y, (width*numberOfNeuronInHiddenLayer), this.refVisTempTwo, true);
+        symbol.outputW1(newMatrixSvg, x + width*numberOfNeuronInHiddenLayer/2 - 10, y - 50);
         const matrixSvgTwo = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgTwo});
 
@@ -830,7 +844,7 @@ class Training extends Component {
         return (
             <div className='App'>
                 <header className='App-header'>
-                    <Typography variant="h4" gutterBottom>
+                    <Typography variant="h4" gutterBottom style={{marginBottom: 0}}>
                         Visualisation of neural network
                     </Typography>
                     <div className={'small'}>The whole algorithm consist only of 10 simple steps.</div>
