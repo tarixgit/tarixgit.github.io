@@ -183,21 +183,42 @@ export default {
             .attr('width', '30')
             .attr('height', '80')
             .style('opacity', delay ? .0 : 1);
+        symbol.append('path')
+            .attr('d', 'M0.5,0.5 L30.5,0.5')
+            .attr('fill', '#000')
+            .attr('fill-rule', '#nonzero')
+            .attr('stroke', '#000')
+            .attr('stroke-width', '3');
+        symbol.append('path')
+            .attr('d', 'M0.5,20.5 L30.5,20.5')
+            .attr('fill', '#000')
+            .attr('fill-rule', '#nonzero')
+            .attr('stroke', '#000')
+            .attr('stroke-width', '3');
+        if (delay) {
+            symbol.transition()
+                .delay(delay)
+                .duration(1000)
+                .style('opacity', .9);
+        }
+        return symbol;
+    },
+    minus: (svg, x, y, delay) => {
+        const symbol = svg.append('svg')
+            .attr('x', !!x ? x : 0)
+            .attr('y', !!y ? y : 0)
+            .attr('viewBox', '0 0 60 60')
+            .attr('width', '30')
+            .attr('height', '80')
+            .style('opacity', delay ? .0 : 1);
         // .attr('width', 10)
         // .attr('height', 42)
         symbol.append('path')
             .attr('d', 'M0.5,0.5 L30.5,0.5')
             .attr('fill', '#000')
             .attr('fill-rule', '#nonzero')
-            .attr('stroke', '#595959')
-            .attr('stroke-width', '1')
-        symbol.append('path')
-            .attr('d', 'M0.5,20.5 L30.5,20.5')
-            .attr('fill', '#000')
-            .attr('fill-rule', '#nonzero')
-            .attr('stroke', '#595959')
-            .attr('stroke-width', '1')
-            .attr('transform', 'translate(24.000000, 17.000000) scale(1, -1) translate(-24.000000, -17.000000) ');
+            .attr('stroke', '#000')
+            .attr('stroke-width', '4');
         if (delay) {
             symbol.transition()
                 .delay(delay)

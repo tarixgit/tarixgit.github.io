@@ -354,18 +354,37 @@ class Training extends Component {
                 this.moveSvgInput(svgInput, coordX + 20, coordY + 2, sizeOfPicture, widthOfCell, 200);
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200, symbol.inputO);
                 this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500, symbol.weightW1);
+                //this.drawAssignment(matrixSvg, null, 128, 60, 3500);
+                symbol.assignment(matrixSvg, 350, 250, 3500);
+                symbol.outputO1(matrixSvg, 370, 245, 3500);
                 return;
             }
             case 2: {
                 const {dataFirstMatrix} = this.state;
                 const yPosition = svgInput.attr('y');
-                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200, symbol.outputO1);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 200, symbol.outputO1);
                 this.drawSecondMatrix( matrixSvg, null, 128, 60, 2500, symbol.weightW2);
+                symbol.assignment(matrixSvg, 350, 250, 3500);
+                symbol.outputO2(matrixSvg, 370, 245, 3500);
                 return;
             }
             case 3: {
-                //this.drawFirstMatrix(matrixSvg);
-                //this.drawSecondMatrix(matrixSvg);
+                const {dataFirstMatrix} = this.state;
+                const yPosition = svgInput.attr('y');
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 200, symbol.outputO2);
+                symbol.minus(matrixSvg, 80, 240, 1000);
+                this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 128, 60, 1200, 't');
+                symbol.assignment(matrixSvg, 180, 238, 2000);
+                matrixSvg.append('text').text('e')
+                    .attr("x", 200)
+                    .attr("y", 273)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(2000)
+                    .duration(1000)
+                    .style('opacity', .9);
                 return;
             }
             default:
@@ -602,7 +621,15 @@ class Training extends Component {
         const data = matrixData ? matrixData : this.prepareMatrixData(numberOfrows, 1); //TODO
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
         //this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
-        descrFunction(newMatrixSvg, x + 2, y - 60);
+        if (typeof descrFunction === "function") {
+            descrFunction(newMatrixSvg, x + 2, y - 60);
+        } else {
+            newMatrixSvg.append('text').text('T')
+                .attr("x", x + 4)
+                .attr("y", y - 19)
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "24px");
+        }
         const matrixSvgOne = this.drawMatrix(newMatrixSvg, data, x, y);
         this.setState({matrixSvgOne});
 
@@ -636,6 +663,17 @@ class Training extends Component {
             .delay(delay)
             .duration(1000)
             .style('opacity', .9);
+    };
+
+    drawAssignment = (matrixSvg, x_coord, y_coord, delay) => {
+        const x = x_coord ? x_coord: 128;
+        const y = y_coord ? y_coord + 60: 60;
+        const width = this.state.widthOfCell;
+        const numberOfInputNeuron = this.state.numberOfInputNeuron;
+        const numberOfNeuronInHiddenLayer = this.state.numberOfNeuronInHiddenLayer;
+        const heightOfCell = this.state.heightOfCell;
+        symbol.assignment(matrixSvg, 128 +  width*(numberOfNeuronInHiddenLayer + 1)/2 +28, y + numberOfInputNeuron*heightOfCell / 2);
+
     };
 
     drawMatrix = (matrixSvg, data, x, y) => {
