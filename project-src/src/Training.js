@@ -326,7 +326,7 @@ class Training extends Component {
                 const coordX = 28;
                 const coordY = 50;
                 const {widthOfCell, heightOfCell} = this.state;
-                this.drawOneDescr(matrixSvg, coordX, coordY, sizeOfPicture.w * widthOfCell, heightOfCell);
+                this.drawOneDescr(matrixSvg, coordX, coordY, sizeOfPicture.w * widthOfCell, heightOfCell); //TODO take another father
                 this.drawOne(matrixSvg, data, coordX, coordY, 500);
                 this.drawArrowDown(matrixSvg, coordX + (sizeOfPicture.w * widthOfCell / 2), coordY + (sizeOfPicture.h + 1) * heightOfCell, 1500);
                 this.drawOneAsMatrix(matrixSvg, data, coordX, coordY + sizeOfPicture.h*heightOfCell + 50, 2500);
@@ -372,6 +372,8 @@ class Training extends Component {
 
         const matrixSvg = !!svgNew ? svgNew : this.state.matrixSvg;
         const svgGraph = !!svgGraphNew ? svgGraphNew : this.state.svgGraph;
+        //TODO move this to switch
+        // before remove all move picture to the right
         if (!!matrixSvg) {
             matrixSvg.selectAll("*").remove();
         } else {
@@ -405,7 +407,8 @@ class Training extends Component {
         for (let i = 1; i <= this.state.numberOfOutputNeuron; i++) {
             outputData.push({
                 x: firstXCoordinate + ((this.state.hiddenLayers + 1) * schubX),
-                y: i * mschubY
+                y: i * mschubY,
+                neuronValue: 0
             })
         }
         hiddenLayerData.push(ipnutData);
@@ -414,7 +417,8 @@ class Training extends Component {
             for (let j = 1; j <= this.state.numberOfInputNeuron; j++) {
                 currentLayer.push({
                     x: firstXCoordinate + (i * schubX),
-                    y: j * mschubY
+                    y: j * mschubY,
+                    neuronValue: 0
                 })
             }
             hiddenLayerData.push(currentLayer);
@@ -445,7 +449,7 @@ class Training extends Component {
                     div.transition()
                         .duration(200)
                         .style('opacity', .9);
-                    div.html('Layer' + layerIndex + '<br/>' + d.x)
+                    div.html('Layer' + layerIndex + '<br/>' + d.neuronValue)
                         .style('left', (d3.event.pageX + 10) + 'px')
                         .style('top', (d3.event.pageY - 18) + 'px');
                 }).on('mouseout', d => {
