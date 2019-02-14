@@ -557,7 +557,7 @@ class Training extends Component {
         let ipnutData = [];
         let outputData = [];
         let hiddenLayerData = [];
-        if (!!svgGraphWithSymbols) {
+        if (!!svgGraphWithSymbols) {  //TODO fix this
             svgGraphWithSymbols.selectAll("*").remove();
         } else {
             return;
