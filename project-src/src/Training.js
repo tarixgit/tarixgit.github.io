@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import symbol from './symbolSVG';
 const { Provider, Node } = require("@nteract/mathjax");
 const d3 = require('d3');
+const math = require('mathjs');
 
 const styles = theme => ({
     root: {
@@ -39,6 +40,8 @@ class Training extends Component {
         super(props);
         this.state = {
             oneInArr: [0,0,1,0,1,1,1,0,1,0,0,1,0,0,1],
+            weightOneData: this.generateWeight(15, 15),
+            weightTwoData: this.generateWeight(15, 9),
             counter: 0,
             width: 1280,
             height: 645,
@@ -48,8 +51,8 @@ class Training extends Component {
             widthOfDesr: 35,
             numberOfInputNeuron: 15,
             numberOfOutputNeuron: 9,
-            numberOfNeuronInHiddenLayer: 9,
-            hiddenLayers: 1,
+            numberOfNeuronInHiddenLayer: 15,
+            hiddenLayers: 1, //don't change
             selectedStep: 0,
             descrFormulaOne: String.raw`\overrightarrow{O}`,
             descrFormulaTwo: String.raw`W_1`,
@@ -83,6 +86,17 @@ class Training extends Component {
     //         this.setStep(0);
     //     }
     // }
+    generateWeight = (rows, columns) => {
+        let result = [];
+        for (let i = 0; i < rows; i++) {
+            let arr = [];
+            for (let j = 0; j < columns; j++) {
+                arr.push(Math.random()); // 0 (inclusive),  and 1 (exclusive)
+            }
+            result.push(arr);
+        }
+        return result;
+    };
 
     getStepDescription = (step) => {
         switch (step) {
@@ -323,8 +337,8 @@ class Training extends Component {
         switch (step) {
             case 0: {
                 const numberOfrows = this.state.numberOfInputNeuron;
-                const data = this.prepareMatrixData(sizeOfPicture.h, sizeOfPicture.w, this.state.oneInArr); //TODO use constant
-                const dataFirstMatrix = this.prepareMatrixData(numberOfrows, 1, this.state.oneInArr);
+                const data = this.prepareMatrixData(sizeOfPicture.h, sizeOfPicture.w, this.state.oneInArr, false); //TODO use constant
+                const dataFirstMatrix = this.prepareMatrixData(numberOfrows, 1, this.state.oneInArr, false);
                 const y = this.state.widthOfDesr;
                 const coordX = 28;
                 const coordY = 50;
@@ -342,35 +356,37 @@ class Training extends Component {
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, coordX + (sizeOfPicture.w+1)*widthOfCell + 125, y, 4500, symbol.inputO);
                 this.drawArrowRight(matrixSvg, 200 + coordX + (sizeOfPicture.w+1) * widthOfCell, coordY + sizeOfPicture.h*heightOfCell + 50 +
                     (heightOfCell * sizeOfPicture.h/2), 5500); // = 200 - is not calculated
-                this.updateChart(svgGraph, this.state.oneInArr, 6500);
+                this.updateChart(svgGraph, 6500, this.state.oneInArr);
                 this.setState({dataFirstMatrix});
                 return;
             }
             case 1: {
                 const coordX = 28;
                 const coordY = 50;
-                const {widthOfCell, heightOfCell, dataFirstMatrix} = this.state;
+                const {widthOfCell, weightOneData, dataFirstMatrix, numberOfInputNeuron, numberOfNeuronInHiddenLayer} = this.state;
+                const dataSecondMatrix = this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer, weightOneData, true);
                 const yPosition = svgInput.attr('y'); //out image
                 this.moveSvgInput(svgInput, coordX + 20, coordY + 2, sizeOfPicture, widthOfCell, 200);
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, yPosition > 0 ? 200 : 1200, symbol.inputO);
-                this.drawSecondMatrix(matrixSvg, null, 128, 60, 2500, symbol.weightW1);
+                this.drawSecondMatrix(matrixSvg, dataSecondMatrix, 128, 60, 2500, symbol.weightW1);
                 //this.drawAssignment(matrixSvg, null, 128, 60, 3500);
                 symbol.assignment(matrixSvg, 350, 250, 3500);
                 symbol.outputO1(matrixSvg, 370, 245, 3500);
+                this.calculate(step);
                 return;
             }
             case 2: {
-                const {dataFirstMatrix} = this.state;
-                const yPosition = svgInput.attr('y');
+                const {weightTwoData, dataFirstMatrix, numberOfInputNeuron, numberOfNeuronInHiddenLayer} = this.state;
+                const dataSecondMatrix = this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer, weightTwoData, true);
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 200, symbol.outputO1);
-                this.drawSecondMatrix( matrixSvg, null, 128, 60, 2500, symbol.weightW2);
+                this.drawSecondMatrix(matrixSvg, dataSecondMatrix, 128, 60, 2500, symbol.weightW2);
                 symbol.assignment(matrixSvg, 350, 250, 3500);
                 symbol.outputO2(matrixSvg, 370, 245, 3500);
+                this.calculate(step);
                 return;
             }
             case 3: {
-                const {dataFirstMatrix} = this.state;
-                const yPosition = svgInput.attr('y');
+                const {dataFirstMatrix, weightTwoData} = this.state;
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 28, 60, 200, symbol.outputO2);
                 symbol.minus(matrixSvg, 80, 240, 1000);
                 this.drawFirstMatrix(matrixSvg, dataFirstMatrix, 128, 60, 1200, 't');
@@ -387,11 +403,126 @@ class Training extends Component {
                     .style('opacity', .9);
                 return;
             }
+            case 4: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 5: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 6: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 7: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 8: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 9: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
+            case 10: {
+                matrixSvg.append('text').text('This step is in implementing stage.')
+                    .attr("x", 0)
+                    .attr("y", 60)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "24px")
+                    .style('opacity', .0)
+                    .transition()
+                    .delay(500)
+                    .duration(1000)
+                    .style('opacity', .9);
+                return;
+            }
             default:
                 return;
         }
     };
-
+    calculate = (step) => {
+        switch (step) {
+            case 1: {
+                const inputVector = math.matrix(this.state.oneInArr);
+                const weightOne = math.matrix(this.state.weightOneData);
+                const hiddenLayerVector = math.multiply(inputVector, weightOne);
+                const resultVector = hiddenLayerVector.map(value => 1 / (1 + Math.exp(-value))); // sigmoid function
+                this.updateChart(this.state.svgGraph, 1000, this.state.oneInArr, resultVector.toArray());
+                this.setState({hiddenLayerVector: resultVector.toArray()});
+                return;
+            }
+            case 2: {
+                const hiddenLayerVector = math.matrix(this.state.hiddenLayerVector);
+                const weightTwo = math.matrix(this.state.weightTwoData);
+                let outputVector = math.multiply(hiddenLayerVector, weightTwo);
+                outputVector = outputVector.map(value => 1 / (1 + Math.exp(-value))); // sigmoid function
+                this.updateChart(this.state.svgGraph, 1000, this.state.oneInArr, this.state.hiddenLayerVector, outputVector.toArray());
+                this.setState({outputVector: outputVector.toArray()});
+                return;
+            }
+            default: {
+                return;
+            }
+        }
+    };
     setStep = (currentStep, svgNew, svgGraphNew, svgInputNew) => {
         const currentStepFormula = this.getStepContent(currentStep);
         const currentDescription = this.getStepDescription(currentStep);
@@ -417,7 +548,7 @@ class Training extends Component {
         this.updateLeftView(currentStep, matrixSvg, svgGraph, svgInput);
     };
 
-    updateChart = (svgNew, inputData, delay) => {
+    updateChart = (svgNew, delay, inputVector, hiddenLayerVector, outputVector) => {
         // Define the div for the tooltip
         const mschubY = 40;
         const schubX = 300;
@@ -443,24 +574,24 @@ class Training extends Component {
             ipnutData.push({
                 x: firstXCoordinate,
                 y: i * mschubY,
-                neuronValue: inputData ? inputData[i-1] : null
+                neuronValue: inputVector ? inputVector[i-1] : 0
             })
         }
         for (let i = 1; i <= this.state.numberOfOutputNeuron; i++) {
             outputData.push({
                 x: firstXCoordinate + ((this.state.hiddenLayers + 1) * schubX),
                 y: i * mschubY,
-                neuronValue: 0
+                neuronValue: outputVector ? outputVector[i-1] : 0
             })
         }
         hiddenLayerData.push(ipnutData);
-        for (let i = 1; i <= this.state.hiddenLayers; i++) {
+        for (let i = 1; i <= this.state.hiddenLayers; i++) {  // ===1
             const currentLayer = [];
             for (let j = 1; j <= this.state.numberOfInputNeuron; j++) {
                 currentLayer.push({
                     x: firstXCoordinate + (i * schubX),
                     y: j * mschubY,
-                    neuronValue: 0
+                    neuronValue: hiddenLayerVector ? hiddenLayerVector[j - 1] : 0
                 })
             }
             hiddenLayerData.push(currentLayer);
@@ -477,7 +608,11 @@ class Training extends Component {
             .attr('class', 'tooltip')
             .style('opacity', 0);
 
+        const greens = d3.scaleSequential()
+            .domain([0, 100])
+            .interpolator(d3.interpolateGreens);
         //draw the circles
+        // all layers
         hiddenLayerData.forEach((currentLayer, layerIndex) => {
             svgGraph.append('g')
                 .selectAll('circle')
@@ -496,7 +631,8 @@ class Training extends Component {
                     div.transition()
                         .duration(200)
                         .style('opacity', .9);
-                    div.html('Layer' + layerIndex + '<br/>' + d.neuronValue)
+                    div.html(() => layerIndex === 1 ?  'HiddenL' + layerIndex + '<br/>' + d.neuronValue.toFixed(5) :
+                        'Layer' + layerIndex + '<br/>' + d.neuronValue.toFixed(5))
                         .style('left', (d3.event.pageX + 10) + 'px')
                         .style('top', (d3.event.pageY - 18) + 'px');
                 }).on('mouseout', d => {
@@ -506,7 +642,14 @@ class Training extends Component {
                 }).transition()
                 .delay(delay ? delay : 0)
                 .duration(delay ? 2500 : 0)
-                .style('fill', d => d.neuronValue ? '#47BA36' : '#FFF');
+                .style('fill', d => {
+                    if (d.neuronValue === 1) {
+                        return '#47BA36';
+                    } else if (d.neuronValue === 0) {
+                        return '#FFF';
+                    }
+                    return greens((d.neuronValue.toFixed(2) * 100));
+                });
         });
 
         //draw the lines
@@ -535,7 +678,7 @@ class Training extends Component {
         });
     };
 
-    prepareMatrixData = (matrixRows, matrixColumns, inputData) => {
+    prepareMatrixData = (matrixRows, matrixColumns, inputData, twoDimensional) => {
         //TODO inputData - is vector or matrix
         const data = [];
         let xpos = 1; //starting xpos and ypos at 1 so the stroke will show when we make the grid below
@@ -548,19 +691,44 @@ class Training extends Component {
         for (let row = 0; row < matrixRows; row++) {
             data.push([]);
 
-            // iterate for cells/columns inside rows
-            for (let column = 0; column < matrixColumns; column++) {
+            if (matrixColumns > 9) { //temporal, because to small place
+                for (let column = 0; column < 8; column++) {
+                    data[row].push({
+                        x: xpos,
+                        y: ypos,
+                        width: width,
+                        height: height,
+                        click: click,
+                        value: twoDimensional ? inputData[row][column].toFixed(1) : inputData[index]
+                    });
+                    index ++;
+                    xpos += width;
+                }
                 data[row].push({
                     x: xpos,
                     y: ypos,
                     width: width,
                     height: height,
                     click: click,
-                    value: inputData ? inputData[index] : 0.1
+                    value: '...'
                 });
-                // increment the x position. I.e. move it over by 50 (width variable)
                 index ++;
                 xpos += width;
+            } else {
+                // iterate for cells/columns inside rows
+                for (let column = 0; column < matrixColumns; column++) {
+                    data[row].push({
+                        x: xpos,
+                        y: ypos,
+                        width: width,
+                        height: height,
+                        click: click,
+                        value: twoDimensional ? inputData[row][column].toFixed(1) : inputData[index]
+                    });
+                    // increment the x position. I.e. move it over by 50 (width variable)
+                    index ++;
+                    xpos += width;
+                }
             }
             // reset the x position after a row is complete
             xpos = 1;
@@ -618,7 +786,6 @@ class Training extends Component {
         const y = y_coord ? y_coord + 60: 60;
         const numberOfrows = this.state.numberOfInputNeuron;
         const width = this.state.widthOfCell;
-        const data = matrixData ? matrixData : this.prepareMatrixData(numberOfrows, 1); //TODO
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + width, y-10, width*(numberOfrows+1));
         //this.drawMatrixDescr(newMatrixSvg, x, y, width, this.refVisTempOne);
         if (typeof descrFunction === "function") {
@@ -630,7 +797,7 @@ class Training extends Component {
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "24px");
         }
-        const matrixSvgOne = this.drawMatrix(newMatrixSvg, data, x, y);
+        const matrixSvgOne = this.drawMatrix(newMatrixSvg, matrixData, x, y);
         this.setState({matrixSvgOne});
 
         newMatrixSvg.transition()
@@ -649,14 +816,14 @@ class Training extends Component {
         const width = this.state.widthOfCell;
         const heightOfCell = this.state.heightOfCell;
         const numberOfInputNeuron = this.state.numberOfInputNeuron;
-        const numberOfNeuronInHiddenLayer = this.state.numberOfNeuronInHiddenLayer;
-        const data = matrixData ? matrixData : this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer);
+        const numberOfNeuronInHiddenLayer = this.state.numberOfNeuronInHiddenLayer > 9 ?  9 : this.state.numberOfNeuronInHiddenLayer; //temporal because of place
+        //const data = matrixData ? matrixData : this.prepareMatrixData(numberOfInputNeuron, numberOfNeuronInHiddenLayer);
         this.drawKreuz(newMatrixSvg, 28 + width + (128 - (28 + width))/2, y + numberOfInputNeuron*heightOfCell / 2);
         this.drawRoundBracket(newMatrixSvg, x, y-10, x + (width*numberOfNeuronInHiddenLayer), y-10, heightOfCell * (numberOfInputNeuron + 1));
         //this.drawMatrixDescr(newMatrixSvg, x, y, (width*numberOfNeuronInHiddenLayer), this.refVisTempTwo, true);
         //draw description
         descrFunction(newMatrixSvg, x + width*numberOfNeuronInHiddenLayer/2 - 10, y - 50);
-        const matrixSvgTwo = this.drawMatrix(newMatrixSvg, data, x, y);
+        const matrixSvgTwo = this.drawMatrix(newMatrixSvg, matrixData, x, y);
         this.setState({matrixSvgTwo});
 
         newMatrixSvg.transition()

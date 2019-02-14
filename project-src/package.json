@@ -9,6 +9,7 @@
     "@nteract/mathjax": "^4.0.0",
     "d3": "^5.8.0",
     "mathjax": "^2.7.5",
+    "mathjs": "^5.4.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-mathjax": "^1.0.1",
