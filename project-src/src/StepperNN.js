@@ -29,7 +29,7 @@ class StepperNN extends React.Component {
     };
 
     getSteps = () => {
-        return ['Initial', 'Multiple input with weight', 'Multiple output with weight', 'Deviation of error', 'Summary error',
+        return ['Initial', 'Multiple input with weight', 'Multiple output with weight', 'Deviation of error',
             'Deviation of Sigmoid 1', 'Deviation of Sigmoid 2', 'Correction coeff. 1', 'Correction coeff. 2',  'Weight correction 1', 'Weight correction 2'];
     };
 
