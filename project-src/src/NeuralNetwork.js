@@ -18,7 +18,7 @@ class NeuralNetwork extends React.Component {
         this.dataFromNeuralNetworkClassification = NeuralNetworkClassification.inputData;
 
         var width = 960,
-            height = 960
+            height = 654
 
 
         // label for the button

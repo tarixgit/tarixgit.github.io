@@ -121,7 +121,7 @@ class NeuralNetworkClassification extends React.Component {
     }
     render () {
         return (
-            <div className='NumberMatrix'>
+            <div className='NumberMatrix' style={{height : "108px"}}>
                 <div ref={refVis => (this.refVisNN = refVis)}>
                 </div>
             </div>
