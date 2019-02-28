@@ -505,6 +505,7 @@ class Training extends Component {
                 return;
         }
     };
+
     calculate = (step) => {
         switch (step) {
             case 1: {
@@ -544,6 +545,7 @@ class Training extends Component {
             }
         }
     };
+
     setStep = (currentStep, svgNew, svgGraphNew, svgInputNew) => {
         const currentStepFormula = this.getStepContent(currentStep);
         const currentDescription = this.getStepDescription(currentStep);
@@ -595,6 +597,7 @@ class Training extends Component {
             ipnutData.push({
                 x: firstXCoordinate,
                 y: i * mschubY,
+                neuronValue: inputVector ? inputVector[i-1] : 0,
                 neuronValue: inputVector ? inputVector[i-1] : 0
             })
         }
@@ -602,6 +605,7 @@ class Training extends Component {
             outputData.push({
                 x: firstXCoordinate + ((this.state.hiddenLayers + 1) * schubX),
                 y: i * mschubY,
+                neuronValue: outputVector ? outputVector[i-1] : 0,
                 neuronValue: outputVector ? outputVector[i-1] : 0
             })
         }
@@ -612,6 +616,7 @@ class Training extends Component {
                 currentLayer.push({
                     x: firstXCoordinate + (i * schubX),
                     y: j * mschubY,
+                    neuronValue: hiddenLayerVector ? hiddenLayerVector[j - 1] : 0, //will not for for all cases
                     neuronValue: hiddenLayerVector ? hiddenLayerVector[j - 1] : 0
                 })
             }
@@ -673,6 +678,8 @@ class Training extends Component {
                 });
         });
 
+        const preparedWeightOne = this.state.weightOneData.map(item => item.map(item2 => item2.toFixed(5)));
+        const preparedWeightTwo = this.state.weightTwoData.map(item => item.map(item2 => item2.toFixed(5)));
         //draw the lines
         hiddenLayerData.forEach((currentLayer, layerIndex) => {
             if (layerIndex == 0) {
@@ -682,7 +689,7 @@ class Training extends Component {
             // take data of weights  from accessorLayer
             //
             const outspace = 3;
-            accessorLayer.forEach(accessor => {
+            accessorLayer.forEach((accessor, accessorIndex) => {
                 svgGraph.append('g')
                     .selectAll('line')
                     .data(currentLayer)
@@ -694,6 +701,20 @@ class Training extends Component {
                     .attr('y1', (d, index) => accessor.y)
                     .attr('x2', d => d.x - this.state.radius - outspace)
                     .attr('y2', d => d.y)
+                    .on('mouseover', (d, index) => {
+                        div.transition()
+                            .duration(200)
+                            .style('opacity', .9);
+                        div.html(() => layerIndex === 1 ? 'W1:' +  '<br/>' + preparedWeightOne[accessorIndex][index] :
+                            'W2:' +  '<br/>' + preparedWeightTwo[accessorIndex][index])
+                            .style('left', (d3.event.pageX + 10) + 'px')
+                            .style('top', (d3.event.pageY - 18) + 'px');
+                    })
+                    .on('mouseout', d => {
+                        div.transition()
+                            .duration(500)
+                            .style('opacity', 0);
+                    })
 
             });
         });
