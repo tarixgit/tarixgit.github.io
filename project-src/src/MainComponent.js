@@ -14,6 +14,16 @@ const styles = theme => ({
         maxWidth: "100%",
         flexGrow: 1,
     },
+    buttonLeft: {
+        position: "absolute",
+        bottom: "3px",
+        left: "0",
+    },
+    buttonRight: {
+        position: "absolute",
+        bottom: "3px",
+        right: "0",
+    },
     header: {
         display: 'flex',
         alignItems: 'center',
@@ -59,18 +69,19 @@ class MainComponent extends Component {
                 <MobileStepper
                     steps={maxSteps}
                     position="static"
+                    variant="text"
                     activeStep={activeStep}
                     className={classes.mobileStepper}
-                    nextButton={
-                        <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+                    backButton={
+                        <Button size="small" className={classes.buttonLeft} onClick={this.handleBack} disabled={activeStep === 0}>
+                            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                             Training
-                            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                         </Button>
                     }
-                    backButton={
-                        <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
-                            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    nextButton={
+                        <Button size="small" className={classes.buttonRight} onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
                             Classification
+                            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                         </Button>
                     }
                 />
